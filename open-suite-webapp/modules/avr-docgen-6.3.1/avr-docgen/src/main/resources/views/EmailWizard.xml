@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <form name="avr-base-email-wizard-form" title="Email wizard" model="com.avr.apps.base.db.EmailWizard" onNew="avr-base-email-wizard-action-record-on-new, avr-base-select-default-group-email-wizard">
+        <panel>
+            <field name="template" title="Template email" required="true" onSelect="action-get-domain-template-by-model" canNew="false"/>
+            <field name="emailAccount" title="Compte de mail"
+                   required="true" canNew="false"/>
+            <field name="metaFileList" onSelect="avr-base-get-domain-file-attachment" widget="TagSelect" canNew="false"/>
+            <field name="entity" readonly="true" hidden="true"/>
+            <field name="ids" readonly="true" hidden="true"/>
+            <spacer />
+            <button name="sendMailWithAttachment" title="Envoyer l'email" onClick="action-send-by-email-with-template-and-attachment" />
+        </panel>
+    </form>
+
+    <action-record name="avr-base-email-wizard-action-record-on-new" model="com.avr.apps.base.db.EmailWizard">
+        <field name="entity" expr="eval: _entity"/>
+        <field name="identities" expr="eval: _identities"/>
+    </action-record>
+
+    <action-group name="avr-base-select-default-group-email-wizard">
+        <action name="avr-base-select-email-account-default"/>
+        <action name="avr-base-select-template-default"/>
+        <action name="avr-base-select-metaFile-default"/>
+    </action-group>
+
+    <action-record name="avr-base-select-email-account-default" model="com.avr.apps.base.db.EmailWizard">
+        <field name="emailAccount" expr="eval: __repo__(EmailAccount).all().filter('self.isDefault = true').fetchOne()"/>
+    </action-record>
+
+    <action-method name="avr-base-select-template-default">
+        <call class="com.avr.apps.docgen.web.EmailController" method="getTemplateIfAlone"/>
+    </action-method>
+
+    <action-method name="avr-base-select-metaFile-default">
+        <call class="com.avr.apps.docgen.web.EmailController" method="getMetaFileIfAlone"/>
+    </action-method>
+
+    <action-method name="avr-base-get-domain-file-attachment">
+        <call class="com.avr.apps.docgen.web.EmailController" method="getDomainMetaFileAttachment"/>
+    </action-method>
+
+    <action-method name="action-get-domain-template-by-model">
+        <call class="com.avr.apps.docgen.web.EmailController" method="getDomainByModel"/>
+    </action-method>
+
+    <action-method name="action-send-by-email-with-template-and-attachment">
+        <call class="com.avr.apps.docgen.web.EmailController" method="sendByWithAttachment"/>
+    </action-method>
+
+    <action-method name="action-show-email-wizard-for-send-mail">
+        <call class="com.avr.apps.docgen.web.EmailController" method="showEmailWizard"/>
+    </action-method>
+
+</object-views>

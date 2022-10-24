@@ -1,0 +1,13 @@
+"importId";"name";"metaModel.fullName"
+1;Avoir;com.axelor.apps.account.db.Invoice
+2;Facture;com.axelor.apps.account.db.Invoice
+3;Facture proforma (facture);com.axelor.apps.account.db.Invoice
+4;Devis;com.axelor.apps.sale.db.SaleOrder
+5;Facture proforma (devis);com.axelor.apps.sale.db.SaleOrder
+6;Commande client;com.axelor.apps.sale.db.SaleOrder
+7;Commande founisseur;com.axelor.apps.purchase.db.PurchaseOrder
+8;Bon de livraison;com.axelor.apps.stock.db.StockMove
+9;Bon de retour;com.axelor.apps.stock.db.StockMove
+24;Fiche logistique;com.axelor.apps.stock.db.LogisticalForm
+26;Fiche logistique sans composant;com.axelor.apps.stock.db.LogisticalForm
+28;Contrat;com.axelor.apps.contract.db.Contract

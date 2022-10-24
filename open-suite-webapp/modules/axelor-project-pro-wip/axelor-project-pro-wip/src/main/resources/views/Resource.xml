@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <form id="project-pro-resource-form" name="resource-form" title="Resource"
+    model="com.axelor.apps.project.db.Resource" width="large" onNew="action-resource-attrs-default">
+    <toolbar>
+      <button name="bookResource" title="Book resource"
+        onClick="save,action-resource-book-resource" hideIf="isModel"/>
+    </toolbar>
+    <panel>
+      <panel colSpan="2" itemSpan="12">
+        <field name="resourceImage" widget="Image"/>
+      </panel>
+      <panel colSpan="8" itemSpan="12">
+        <field name="name"/>
+        <field name="resourceType"/>
+        <field name="cost"/>
+        <field name="batchNo"/>
+        <field name="resourceModel" domain="self.isModel = true" hideIf="isModel"
+          onChange="action-resource-attr-resource-model-change"/>
+        <field name="isModel" hidden="true"/>
+      </panel>
+    </panel>
+  </form>
+
+  <action-attrs name="action-resource-attrs-default"
+    model="com.axelor.apps.project.db.Resource">
+    <attribute name="value" for="isModel" expr="eval:_isModel"/>
+  </action-attrs>
+
+  <action-attrs name="action-resource-attr-resource-model-change">
+    <attribute name="value" for="name" expr="eval: resourceModel.name"
+      if="resourceModel != null"/>
+    <attribute name="value" for="resourceType" expr="eval: resourceModel.resourceType"
+      if="resourceModel != null"/>
+    <attribute name="value" for="cost" expr="eval: resourceModel.cost"
+      if="resourceModel != null"/>
+    <attribute name="value" for="resourceImage" expr="eval: resourceModel.resourceImage"
+      if="resourceModel != null"/>
+  </action-attrs>
+
+</object-views>

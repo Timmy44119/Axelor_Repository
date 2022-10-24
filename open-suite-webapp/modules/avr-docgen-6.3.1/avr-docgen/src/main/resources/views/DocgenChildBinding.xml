@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid name="avr-docgen-child-binding-grid" title="Docgen child bindings"
+	  model="com.avr.apps.docgen.db.DocgenChildBinding">
+		<field name="keyBinding" title="key Binding"/>
+		<field name="metaField" title="Choix du champs"/>
+		<field name="typeTemplate"/>
+		<field name="query"/>
+		<field name="metaModel"/>
+	</grid>
+
+	<form name="avr-docgen-child-binding-form" title="Docgen child binding"
+	  model="com.avr.apps.docgen.db.DocgenChildBinding"
+	  onLoad="com.avr.apps.docgen.web.DocgenChildBindingController:checkFieldCorrectly">
+		<panel-tabs>
+			<panel name="informations" title="Informations">
+				<panel showIf="typeTemplate == 'FIELD'" colSpan="12">
+					<field name="metaField" title="Choix du champs" showIf="typeTemplate == 'FIELD'"
+						   onSelect="action-method-docgen-child-metafield-order-get-domain"
+						   canEdit="false" />
+					<field name="keyBinding" title="Clé"/>
+					<field name="typeTemplate" title="Type" onChange="action-docgen-child-binding-record-on-change"/>
+					<field name="$isValidate" type="boolean" title="Validate" required="true"
+						   readonly="true"/>
+				</panel>
+				<panel showIf="['QUERY', 'QUERY_NATIVE'].includes(typeTemplate)" colSpan="12">
+					<field name="keyBinding" title="Clé"/>
+					<field name="typeTemplate" title="Type" onChange="action-docgen-binding-record-on-change"/>
+					<field name="$isValidate" type="boolean" title="Validate" required="true"
+						   readonly="true"/>
+					<field name="query" title="Query" showIf="['QUERY', 'QUERY_NATIVE'].includes(typeTemplate)" colSpan="12"
+						   widget="CodeEditor" x-code-syntax="text"/>
+				</panel>
+				<button-group showIf="typeTemplate == 'FIELD'">
+					<button name="selectedMetaField" title="Validate"
+					  onClick="action-method-docgen-child-metafield-selected" />
+					<button name="clearMetaField" title="Nettoyer"
+					  onClick="action-method-docgen-child-metafield-clear" colSpan="4" />
+				</button-group>
+				<button name="testQuery" onClick="action-docgen-child-binding-test-query"
+				  title="Tester la requête" showIf="['QUERY', 'QUERY_NATIVE'].includes(typeTemplate)"/>
+
+			</panel>
+			<panel name="configuration" title="Bindings"
+			  showIf="(typeTemplate == 'FIELD' &amp;&amp; targetField != null &amp;&amp; targetField != ' ') || (typeTemplate == 'QUERY' &amp;&amp; metaModel != null)">
+				<field name="docgenBindingList" title="Root binding" colSpan="12" height="500"
+				/>
+			</panel>
+			<panel name="configuration" title="Configuration">
+				<field name="metaModel" readonlyIf="typeTemplate == 'FIELD'" required="true"/>
+				<field name="targetField" requiredIf="typeTemplate == 'FIELD'"/>
+				<field name="isOrderData"/>
+				<field name="isAscending" showIf="isOrderData"/>
+				<field name="metaFieldOrder" showIf="isOrderData"
+				  onSelect="action-method-docgen-child-metafield-order-get-domain"
+				  requiredIf="isOrderData"/>
+			</panel>
+		</panel-tabs>
+	</form>
+
+	<action-method name="action-docgen-child-binding-record-on-change">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController" method="onChangeTypeTemplate"/>
+	</action-method>
+
+	<action-method name="action-docgen-child-binding-test-query">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController" method="testQuery"/>
+	</action-method>
+
+	<action-method name="action-method-type-template-on-change">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController"
+		  method="typeTemplateChange"/>
+	</action-method>
+
+	<action-method name="action-method-docgen-child-metafield-order-get-domain">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController"
+		  method="getDomainFilter"/>
+	</action-method>
+
+	<action-method name="action-method-docgen-child-metafield-get-domain">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController" method="getDomain"/>
+	</action-method>
+
+	<action-method name="action-method-docgen-child-metafield-clear">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController" method="clear"/>
+	</action-method>
+
+	<action-method name="action-method-docgen-child-metafield-selected">
+		<call class="com.avr.apps.docgen.web.DocgenChildBindingController" method="selected"/>
+	</action-method>
+
+</object-views>

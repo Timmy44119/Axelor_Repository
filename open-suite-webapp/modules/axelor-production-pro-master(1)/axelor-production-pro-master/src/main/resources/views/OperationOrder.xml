@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <!-- <gantt name="operation-order-planned-gantt" title="Operations" model="com.axelor.apps.production.db.OperationOrder"
+    taskStart="plannedStartDateT" taskDuration="plannedDuration" taskEnd="plannedEndDateT" groupBy="workCenter"> -->
+  <!-- <field name="operationName"/> -->
+  <!-- </gantt> -->
+
+  <gantt name="operation-order-planned-gantt" title="Operations"
+    model="com.axelor.apps.production.db.OperationOrder" taskStart="plannedStartDateT"
+    taskDuration="plannedDuration" taskEnd="plannedEndDateT">
+    <field name="operationName"/>
+  </gantt>
+
+  <action-method name="action-production-pro-method-operation-move">
+    <call class="com.axelor.apps.production.pro.web.ProProductionOrderController"
+      method="operationOrderMove"/>
+  </action-method>
+
+  <action-method name="action-production-pro-method-operation-plan">
+    <call class="com.axelor.apps.production.pro.web.ProProductionOrderController"
+      method="operationOrderPlan"/>
+  </action-method>
+
+</object-views>

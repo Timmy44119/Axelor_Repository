@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid id="avr-docgen-stock-move-grid" name="stock-move-grid" title="Stock moves"
+	  model="com.axelor.apps.stock.db.StockMove" orderBy="statusSelect,-estimatedDate">
+		<extend target="//button[@name='printStockMoveBtn']" if-module="avr-docgen">
+			<attribute name="onClick" value="action-group-print-stock-move"/>
+		</extend>
+
+		<extend target="//button[@name='printStockMoveGridBtn']">
+			<attribute name="onClick"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+
+		<extend target="//field[@name='partner']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" title="Titre" width="600" if-module="avr-docgen"
+				  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableStockMove()"/>
+			</insert>
+		</extend>
+	</grid>
+
+	<grid id="avr-stock-stock-move-out-grid" name="stock-move-out-grid" title="Stock moves"
+	  model="com.axelor.apps.stock.db.StockMove" extension="true" edit-icon="true">
+		<extend target="//field[@name='partner']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" title="Titre" width="600" if-module="avr-docgen"
+				  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableStockMove()"/>
+			</insert>
+		</extend>
+	</grid>
+
+
+	<grid id="avr-docgen-stock-move-in-grid" name="stock-move-in-grid" title="Stock moves"
+		  model="com.axelor.apps.stock.db.StockMove" extension="true" edit-icon="true">
+		<extend target="//field[@name='partner']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" title="Titre" width="400" if-module="avr-docgen"
+					   if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableStockMove()"/>
+			</insert>
+		</extend>
+
+		<extend target="//button[@name='printStockMoveBtn']" if-module="avr-docgen">
+			<attribute name="onClick" value="action-group-print-stock-move"/>
+		</extend>
+		<extend target="//button[@name='printStockMoveGridBtn']" if-module="avr-docgen">
+			<attribute name="onClick"
+					   value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+	</grid>
+
+	<grid id="avr-docgen-stock-move-out-grid" name="stock-move-out-grid" title="Stock moves"
+	  model="com.axelor.apps.stock.db.StockMove" orderBy="-estimatedDate">
+		<extend target="//button[@name='printStockMoveBtn']" if-module="avr-docgen">
+			<attribute name="onClick" value="action-group-print-stock-move"/>
+		</extend>
+		<extend target="//button[@name='printStockMoveGridBtn']" if-module="avr-docgen">
+			<attribute name="onClick"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+	</grid>
+
+	<grid id="avr-docgen-stock-move-out-availability-req-grid"
+	  name="stock-move-out-availability-req-grid" title="Stock moves"
+	  model="com.axelor.apps.stock.db.StockMove" orderBy="-estimatedDate">
+		<extend target="//button[@name='printStockMoveBtn']" if-module="avr-docgen">
+			<attribute name="onClick" value="action-group-print-stock-move"/>
+		</extend>
+		<extend target="//button[@name='printStockMoveGridBtn']" if-module="avr-docgen">
+			<attribute name="onClick"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+	</grid>
+
+	<form id="avr-docgen-stock-move-form" name="stock-move-form" title="Stock move"
+	  model="com.axelor.apps.stock.db.StockMove" extension="true">
+
+		<extend target="//item[@name='printInternalMoveItem']" if-module="avr-docgen">
+			<attribute name="action"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+
+		<extend target="//menu[@name='stockMoveReportsMenu']">
+			<attribute name="icon" value="fa-print" />
+		</extend>
+
+		<extend target="//item[@name='printInternalMoveItem']">
+			<insert position="after">
+				<item name="printInternalMoveItemAndSave" title="Imprimer et sauvegarder le transfert" showIf="typeSelect == 1" readonlyIf="statusSelect == 1" action="action-stock-move-group-save-and-update-stocks,action-print-and-save-custom-stock-move"/>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='printOutgoingMoveItem']">
+			<insert position="after">
+				<item name="printOutgoingMoveItemSave" title="Imprimer et sauvegarder le BL" showIf="typeSelect == 2" readonlyIf="statusSelect == 1" action="action-stock-move-group-save-and-update-stocks,action-print-and-save-custom-stock-move"/>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='printIncomingMoveItem']">
+			<insert position="after">
+				<item name="printIncomingMoveItemSave" title="Imprimer et sauvegarder le BR" showIf="typeSelect == 3" readonlyIf="statusSelect == 1" action="action-stock-move-group-save-and-update-stocks,action-print-and-save-custom-stock-move"/>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='refreshProductNetMassItem']" if-module="avr-docgen">
+			<insert position="after">
+				<item name="sendEmailWithAttachmentItem" title="Envoyer mail avec une pièce-jointe"
+				  readonlyIf="partner == null"
+				  action="save,action-show-email-wizard-for-send-mail" if-module="avr-docgen"
+				  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableStockMove()"/>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='printOutgoingMoveItem']" if-module="avr-docgen">
+			<attribute name="action"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+
+		<extend target="//item[@name='printIncomingMoveItem']" if-module="avr-docgen">
+			<attribute name="action"
+			  value="action-stock-move-group-save-and-update-stocks,action-group-print-stock-move"/>
+		</extend>
+
+		<extend target="//panel[@name='incomingMovePanel']">
+			<insert position="after">
+				<panel colSpan="12" name="titleInformation">
+					<field name="title" title="Titre"/>
+				</panel>
+			</insert>
+		</extend>
+	</form>
+
+	<action-group name="action-group-print-stock-move" if-module="avr-docgen">
+		<action name="action-print-stock-move"
+		  if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableStockMove()"/>
+		<action name="action-print-custom-stock-move"
+		  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableStockMove()"/>
+	</action-group>
+
+	<action-method name="action-print-custom-stock-move">
+		<call class="com.avr.apps.docgen.web.StockMoveController" method="printStockMove"/>
+	</action-method>
+
+	<action-method name="action-print-and-save-custom-stock-move">
+		<call class="com.avr.apps.docgen.web.StockMoveController" method="savePrintStockMove"/>
+	</action-method>
+
+</object-views>

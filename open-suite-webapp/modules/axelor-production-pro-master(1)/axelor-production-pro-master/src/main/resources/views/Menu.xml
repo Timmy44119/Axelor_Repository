@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+
+  <menuitem id="prodution-pro-manufacturing-root-operation-order-planned-calendar"
+    name="manufacturing-root-operation-order-planned-calendar" parent="manufacturing-root"
+    title="Planned operations" action="manufacturing.root.operation.order.planned.calendar"
+    order="30"/>
+
+  <action-view id="production.pro.manufacturing.root.operation.order.planned.calendar"
+    name="manufacturing.root.operation.order.planned.calendar" title="Planned operations"
+    model="com.axelor.apps.production.db.OperationOrder">
+    <view type="calendar" name="operation-order-planned-calendar"/>
+    <view type="gantt" name="operation-order-planned-gantt"/>
+    <view type="grid" name="operation-order-grid"/>
+    <view type="form" name="operation-order-form"/>
+  </action-view>
+
+  <menuitem name="manufacturing-root-machine-tree" parent="manufacturing-root"
+    title="Planning per machine" order="31"/>
+
+  <menuitem title="Sort by stock location"
+    name="manufacturing-root-sort-by-stock-location-tree" parent="manufacturing-root-machine-tree"
+    action="manufacturing.root.sort.by.stock.location.tree"/>
+
+  <menuitem title="Sort by machine type"
+    name="manufacturing-root-sort-by-machine-type-tree" parent="manufacturing-root-machine-tree"
+    action="manufacturing.root.sort.by.machine.type.tree"/>
+
+  <action-view name="manufacturing.root.sort.by.stock.location.tree"
+    title="Sort by stock location" model="com.axelor.apps.production.db.Machine">
+    <view type="tree" name="sort-by-stock-location-tree"/>
+    <context name="_stockLocationIds"
+      expr="eval:__repo__(Machine).all().filter('self.stockLocation != null').fetch().collect{it->it.stockLocation.id}"/>
+  </action-view>
+
+  <action-view name="manufacturing.root.sort.by.machine.type.tree"
+    title="Sort by machine type" model="com.axelor.apps.production.db.Machine">
+    <view type="tree" name="sort-by-machine-type-tree"/>
+    <context name="_machineTypeIds"
+      expr="eval:__repo__(Machine).all().filter('self.machineType != null').fetch().collect{it->it.machineType.id}"/>
+  </action-view>
+
+
+</object-views>

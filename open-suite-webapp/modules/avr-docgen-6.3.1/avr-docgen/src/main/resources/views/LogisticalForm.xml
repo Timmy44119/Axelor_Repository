@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+	<form id="avr-docgen-logistical-form-form" name="logistical-form-form" title="Logistical form"
+	  model="com.axelor.apps.stock.db.LogisticalForm" extension="true">
+
+		<extend target="//button[@name='packingListBtn']" if-module="avr-docgen">
+			<attribute name="if"
+			  value="__config__.app.isApp('supplychain') &amp;&amp; (!__config__.app.isApp('docgen') || !__config__.app.getApp('docgen')?.getEnableLogisticalForm())"/>
+		</extend>
+
+		<extend target="//toolbar" if-module="avr-docgen">
+			<insert position="before">
+				<menubar>
+					<menu name="logisticalFormDocgenReportMenu" title="Reports" if-module="avr-docgen"
+					  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableLogisticalForm()" icon="fa-print">
+<!--						<item name="packingListBtn" title="Impression colisage"-->
+<!--						  action="action-group-logistical-form-print-packing-composite-list"-->
+<!--						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableLogisticalForm()"/>-->
+<!--						<item name="packingListAndSaveBtn"-->
+<!--						  title="Impression colisage et sauvegarder"-->
+<!--						  action="action-group-logistical-form-print-packing-composite-list-and-save"-->
+<!--						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableLogisticalForm()"/>-->
+						<item name="printPackingWithoutComposite"
+						  title="Impression colisage sans les composants"
+						  action="action-group-logistical-form-print-packing-without-composite-list"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableLogisticalForm()"/>
+						<item name="printPackingWithoutCompositeAndSave"
+						  title="Impression colisage sans les composants et sauvegarder"
+						  action="action-group-logistical-form-print-packing-without-composite-list-and-save"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableLogisticalForm()"/>
+					</menu>
+				</menubar>
+			</insert>
+		</extend>
+	</form>
+
+	<action-group name="action-group-logistical-form-print-packing-without-composite-list-and-save">
+		<action name="save"/>
+		<action name="action-method-logistical-form-print-packing-without-composite-list-and-save"/>
+	</action-group>
+
+	<action-method
+	  name="action-method-logistical-form-print-packing-without-composite-list-and-save">
+		<call method="printWithoutCompositeAndSave"
+		  class="com.avr.apps.docgen.web.LogisticalFormController"/>
+	</action-method>
+
+	<action-group name="action-group-logistical-form-print-packing-without-composite-list">
+		<action name="save"/>
+		<action name="action-method-logistical-form-print-packing-without-composite-list"/>
+	</action-group>
+
+	<action-method name="action-method-logistical-form-print-packing-without-composite-list">
+		<call method="printWithoutComposite"
+		  class="com.avr.apps.docgen.web.LogisticalFormController"/>
+	</action-method>
+
+	<action-group name="action-group-logistical-form-print-packing-composite-list">
+		<action name="save"/>
+		<action name="action-method-logistical-form-print-packing-composite-list"/>
+	</action-group>
+
+	<action-method name="action-method-logistical-form-print-packing-composite-list">
+		<call method="printComposite" class="com.avr.apps.docgen.web.LogisticalFormController"/>
+	</action-method>
+
+	<action-group name="action-group-logistical-form-print-packing-composite-list-and-save">
+		<action name="save"/>
+		<action name="action-method-logistical-form-print-packing-composite-list-and-save"/>
+	</action-group>
+
+	<action-method name="action-method-logistical-form-print-packing-composite-list-and-save">
+		<call method="printCompositeAndSave"
+		  class="com.avr.apps.docgen.web.LogisticalFormController"/>
+	</action-method>
+
+</object-views>

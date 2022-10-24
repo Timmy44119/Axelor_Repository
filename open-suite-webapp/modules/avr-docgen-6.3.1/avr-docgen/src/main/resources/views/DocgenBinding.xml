@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <grid name="avr-docgen-binding-grid" title="Docgen  bindings" model="com.avr.apps.docgen.db.DocgenBinding">
+        <field name="keyBinding" title="Clé"/>
+        <field name="typeTemplate" title="Type"/>
+        <field name="typeData" />
+        <field name="query" title="Query"/>
+        <field name="metaField" title="Choix du champs"/>
+        <field name="targetField"/>
+    </grid>
+
+    <form name="avr-docgen-binding-form" title="Docgen binding" model="com.avr.apps.docgen.db.DocgenBinding"
+          onLoad="com.avr.apps.docgen.web.DocgenBindingController:checkFieldCorrectly" width="large">
+        <panel>
+            <panel showIf="typeTemplate == 'FIELD'" colSpan="12">
+                <field name="metaField" title="Choix du champs" showIf="typeTemplate == 'FIELD'"
+                       onSelect="action-method-docgen-metafield-get-domain"
+                       canEdit="false" />
+                <field name="keyBinding" title="Clé"/>
+                <field name="typeTemplate" title="Type" onChange="action-docgen-binding-record-on-change"/>
+                <field name="$isValidate" type="boolean" title="Validate" requiredIf="typeTemplate == 'FIELD'" readonly="true"
+                       showIf="typeTemplate == 'FIELD'"/>
+                <field name="typeData" required="true"/>
+                <field name="hasDateOnlyReturning" showIf="typeData == 'LOCALDATETIME'"/>
+                <help showIf="typeData == 'PICTURE'" >
+                    <![CDATA[
+                   Attention les images ont besoin du path
+                ]]>
+                </help>
+                <field name="targetField" requiredIf="typeTemplate == 'FIELD'"/>
+                <field name="bigDecimalScale" showIf="typeData == 'BIGDECIMAL'" />
+            </panel>
+            <panel showIf="['QUERY', 'QUERY_NATIVE'].includes(typeTemplate)" colSpan="12">
+                <field name="keyBinding" title="Clé"/>
+                <field name="typeTemplate" title="Type" onChange="action-docgen-binding-record-on-change"/>
+                <field name="typeData" required="true"/>
+                <field name="isJoiningResult" showIf="typeData == 'STANDARD'"/>
+                <field name="joiningSeparator" showIf="isJoiningResult" requiredIf="isJoiningResult" help="Pour ajouter des espaces utiliser '_', pour sauter des lignes utiliser '/newline'"/>
+                <field name="hasDateOnlyReturning" showIf="typeData == 'LOCALDATETIME'"/>
+                <help showIf="typeData == 'PICTURE'" >
+                    <![CDATA[
+                   Attention les images ont besoin du path
+                ]]>
+                </help>
+                <field name="bigDecimalScale" showIf="typeData == 'BIGDECIMAL'" />
+                <field name="query" title="Query" colSpan="12" widget="CodeEditor" x-code-syntax="text"/>
+            </panel>
+            <button-group colSpan="12" showIf="typeTemplate == 'FIELD'">
+                <button name="selectedMetaField" title="Validate"
+                        onClick="action-method-docgen-metafield-selected" />
+                <button name="clearMetaField" title="Nettoyer"
+                        onClick="action-method-docgen-metafield-clear" colSpan="4" colOffset="2" css="btn-info"/>
+            </button-group>
+            <button name="testQuery" onClick="action-docgen-binding-test-query" title="Tester la requête" showIf="['QUERY', 'QUERY_NATIVE'].includes(typeTemplate)"/>
+        </panel>
+    </form>
+
+    <action-method name="action-docgen-binding-test-query">
+        <call class="com.avr.apps.docgen.web.DocgenBindingController" method="testQuery"/>
+    </action-method>
+
+    <action-method name="action-docgen-binding-record-on-change">
+        <call class="com.avr.apps.docgen.web.DocgenBindingController" method="onChangeTypeTemplate"/>
+    </action-method>
+
+    <action-method name="action-method-docgen-metafield-get-domain">
+        <call class="com.avr.apps.docgen.web.DocgenBindingController" method="getDomain"/>
+    </action-method>
+
+    <action-method name="action-method-docgen-metafield-clear">
+        <call class="com.avr.apps.docgen.web.DocgenBindingController" method="clear"/>
+    </action-method>
+
+    <action-method name="action-method-docgen-metafield-selected">
+        <call class="com.avr.apps.docgen.web.DocgenBindingController" method="selected"/>
+    </action-method>
+
+</object-views>

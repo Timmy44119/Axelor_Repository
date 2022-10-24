@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<menuitem name="avr-docgen-root" title="Docgen"
+	  icon="fa-print" icon-background="#43a047" if="__config__.app.isApp('docgen')"/>
+
+	<!-- DocgenTemplate MENU -->
+	<menuitem name="avr-docgen-docgen-template" title="Docgen  templates"
+	  action="avr-docgen-docgen-template-action"
+	  parent="avr-docgen-root" />
+	<action-view name="avr-docgen-docgen-template-action" title="Docgen  template"
+	  model="com.avr.apps.docgen.db.DocgenTemplate">
+		<view type="grid" name="avr-docgen-template-grid"/>
+		<view type="form" name="avr-docgen-template-form"/>
+	</action-view>
+
+	<menuitem name="avr-docgen-configuration" title="Configurations" parent="avr-docgen-root"/>
+	<menuitem name="avr-docgen-sub-type-docgen" title="Sous-types"
+	  action="avr-docgen-sub-type-docgen-action"
+	  parent="avr-docgen-configuration"/>
+	<action-view name="avr-docgen-sub-type-docgen-action" title="Sous-types"
+	  model="com.avr.apps.docgen.db.DocgenSubType">
+		<view type="grid" name="sub-type-docgen-grid"/>
+		<view type="form" name="sub-type-docgen-form"/>
+	</action-view>
+
+
+</object-views>

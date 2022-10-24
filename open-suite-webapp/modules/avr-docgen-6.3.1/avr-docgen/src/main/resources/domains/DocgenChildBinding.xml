@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+    <module name="avr" package="com.avr.apps.docgen.db"/>
+    <entity name="DocgenChildBinding" lang="java">
+        <string name="keyBinding" title="key Binding" required="true" />
+        <many-to-one name="metaField" title="Choix du champs" ref="com.axelor.meta.db.MetaField"/>
+        <many-to-one name="metaModel" ref="com.axelor.meta.db.MetaModel" title="Modèle cible"/>
+        <many-to-one name="docgenTemplate" ref="com.avr.apps.docgen.db.DocgenTemplate" />
+        <enum name="typeTemplate" ref="TypeTemplate" title="Type" required="true" default="FIELD"/>
+        <string name="query" title="Query" large="true"/>
+        <string name="targetField" title="Champ cible"
+                help="Lors de la recherche de l'élément (si c'est une relation), le système recherchera sur le champs séléctionné"
+                readonly="true"/>
+        <one-to-many name="docgenBindingList" ref="com.avr.apps.docgen.db.DocgenBinding" title="Root binding" mappedBy="docgenChildBinding"/>
+        <boolean name="isOrderData" title="Ordonner les données ?" default="false"/>
+        <boolean name="isAscending" title="Ascendant ?" default="true"/>
+        <many-to-one name="metaFieldOrder" title="Choix du champs pour filtrer" ref="com.axelor.meta.db.MetaField"/>
+    </entity>
+
+
+</domain-models>

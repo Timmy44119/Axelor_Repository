@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+    <grid id="avr-docgen-sale-order-quotation-grid" name="sale-order-quotation-grid"
+          title="Sale quotations" model="com.axelor.apps.sale.db.SaleOrder" extension="true">
+
+        <extend target="//field[@name='clientPartner']">
+            <insert position="after">
+                <field name="title" width="600" if-module="avr-docgen"
+                       if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+            </insert>
+        </extend>
+    </grid>
+
+    <form id="avr-docgen-sale-order-form" name="sale-order-form" title="Sale order"
+          model="com.axelor.apps.sale.db.SaleOrder" extension="true">
+
+        <extend target="//button[@name='reportsBtn']" if-module="avr-docgen">
+            <attribute name="if"
+                       value="clientPartner == null || (__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableSaleOrder())"/>
+        </extend>
+
+        <extend target="//panel[@name='addressPanel']">
+            <insert position="after">
+                <field name="title" if-module="avr-docgen"
+                       if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()" colSpan="12"/>
+            </insert>
+        </extend>
+
+        <extend target="//toolbar" if-module="avr-docgen">
+            <replace></replace>
+        </extend>
+
+        <extend target="//menu[@name='saleOrderToolsMenu']" if-module="avr-docgen">
+            <insert position="after">
+                <menu name="saleOrderDocgenReportMenu" title="Reports" if-module="avr-docgen"
+                      if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"
+                      icon="fa-print">
+                    <item name="printItem" title="Print" hideIf="clientPartner == null"
+                          action="save,action-sale-order-method-show-sale-order"/>
+                    <item name="printProformaInvoiceItem" title="Imprimer facture proforma"
+                          hideIf="clientPartner == null" action="save,action-sale-order-method-print-proforma-invoice"/>
+                    <item name="printReceiptConfirmation" title="Imprimer l'accusé de réception"
+                          readonlyIf="statusSelect &lt; 2 &amp;&amp; statusSelect > 3"
+                          action="avr-docgen-action-sale-order-method-print-receipt-confirmation"/>
+                    <item name="printAndSave" title="Sauvegarder le devis/commande"
+                          readonlyIf="statusSelect &lt; 2 &amp;&amp; statusSelect > 3"
+                          action="save,action-sale-order-method-save-sale-order"/>
+                </menu>
+            </insert>
+            <attribute name="icon" value="fa-wrench"/>
+        </extend>
+
+        <extend target="//field[@name='deliveryDate']" if-module="avr-docgen">
+            <insert position="after">
+                <field name="deadlineDate" if-module="avr-docgen"
+                       if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+            </insert>
+        </extend>
+
+        <extend target="//item[@name='defineAsTemplateItem']" if-module="avr-docgen">
+            <insert position="after">
+                <item name="sendEmailWithAttachmentItem" title="Envoyer mail avec une pièce-jointe"
+                      readonlyIf="clientPartner == null"
+                      action="save,action-show-email-wizard-for-send-mail" if-module="avr-docgen"
+                      if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+            </insert>
+        </extend>
+
+    </form>
+
+    <action-group id="avr-docgen-action-group-sale-order-finalize-quotation"
+                  name="action-group-sale-order-finalize-quotation" if-module="avr-docgen">
+        <action name="save"/>
+        <action name="action-sale-order-validate-quotation"/>
+        <action name="action-sale-order-method-finalize-quotation"
+                if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+        <action name="action-sale-order-method-custom-finalize-quotation"
+                if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+    </action-group>
+
+    <action-group name="action-group-sale-order-method-show-sale-order" if-module="avr-docgen">
+        <action name="action-sale-order-method-show-sale-order"
+                if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+        <action name="action-sale-order-method-custom-show-sale-order"
+                if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+    </action-group>
+
+    <action-group name="action-group-sale-order-method-print-proforma-invoice"
+                  if-module="avr-docgen">
+        <action name="action-sale-order-method-print-proforma-invoice"
+                if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+        <action name="action-sale-order-method-custom-print-proforma-invoice"
+                if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()"/>
+    </action-group>
+
+    <action-method name="avr-docgen-action-sale-order-method-print-receipt-confirmation">
+        <call class="com.avr.apps.docgen.web.SaleOrderController"
+              method="printReceiptConfirmation"/>
+    </action-method>
+
+    <action-method name="action-sale-order-method-custom-finalize-quotation">
+        <call class="com.avr.apps.docgen.web.SaleOrderController" method="finalizeQuotation"/>
+    </action-method>
+
+    <action-method name="action-sale-order-method-custom-show-sale-order">
+        <call class="com.avr.apps.docgen.web.SaleOrderController" method="showSaleOrder"/>
+    </action-method>
+
+    <action-method name="action-sale-order-method-save-sale-order">
+        <call class="com.avr.apps.docgen.web.SaleOrderController" method="saveSaleOrder"/>
+    </action-method>
+
+    <action-method name="action-sale-order-method-custom-print-proforma-invoice">
+        <call class="com.avr.apps.docgen.web.SaleOrderController" method="printProformaInvoice"/>
+    </action-method>
+
+    <action-method name="action-avr-sale-order-payment-condition-on-change">
+        <call class="com.avr.apps.docgen.web.SaleOrderController" method="computedDeadLine"/>
+    </action-method>
+
+    <action-method id="avr-docgen-action-sale-order-method-show-sale-order"
+                   name="action-sale-order-method-show-sale-order">
+        <call method="showSaleOrder" class="com.avr.apps.docgen.web.SaleOrderController"/>
+    </action-method>
+
+    <action-method id="avr-docgen-action-sale-order-method-print-proforma-invoice"
+                   name="action-sale-order-method-print-proforma-invoice">
+        <call method="printProformaInvoice" class="com.avr.apps.docgen.web.SaleOrderController"/>
+    </action-method>
+
+
+</object-views>

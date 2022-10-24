@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <grid name="avr-docgen-model-grid" title="Docgen  models" model="com.avr.apps.docgen.db.DocgenModel">
+        <field name="language" title="Language"/>
+		<field name="metaFile" title="File"/>
+    </grid>
+
+    <form name="avr-docgen-model-form" title="Docgen model" model="com.avr.apps.docgen.db.DocgenModel">
+        <panel>
+            <field name="language" title="Language"/>
+			<field name="metaFile" title="File" widget="binary-link"/>
+        </panel>
+    </form>
+
+
+</object-views>

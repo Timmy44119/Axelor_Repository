@@ -1,0 +1,2 @@
+"name";"code";"installOrder";"description";"imagePath";"modules";"dependsOn";"sequence";"url";"action"
+"Docgen";"docgen";99;"Document generator";"app-docgen.png";"avr-docgen";"axelor-supplychain";200;"https://docgen.avr-info.tech/";"5fbe48fb-0266-415d-bcc3-43f2a5390872/generatefile"

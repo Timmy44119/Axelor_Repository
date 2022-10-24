@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <tree name="sort-by-machine-type-tree" title="Sort by machine type">
+    <column name="name" type="string"/>
+    <node model="com.axelor.apps.production.db.MachineType"
+      domain="self.id in :_machineTypeIds"
+      onClick="action-production-method-open-machine-type-planning">
+      <field name="name" as="name"/>
+    </node>
+
+    <node model="com.axelor.apps.production.db.Machine" parent="machineType"
+      onClick="action-production-method-open-machine-planning">
+      <field name="name" as="name"/>
+    </node>
+  </tree>
+
+  <tree name="sort-by-stock-location-tree" title="Sort by stock location">
+    <column name="name" type="string"/>
+    <node model="com.axelor.apps.stock.db.StockLocation" domain="self.id in :_stockLocationIds"
+      onClick="action-production-method-open-stock-location-planning">
+      <field name="name" as="name"/>
+    </node>
+
+    <node model="com.axelor.apps.production.db.Machine" parent="stockLocation"
+      onClick="action-production-method-open-machine-planning">
+      <field name="name" as="name"/>
+    </node>
+  </tree>
+
+  <form extension="true" model="com.axelor.apps.production.db.Machine" title="Machine"
+    id="production-pro-machine-form" name="machine-form">
+    <extend target="//field[@name='stockLocation']">
+      <insert position="after">
+        <field name="workCenter"
+          onSelect="action-production-pro-set-work-center-domain-on-machine" required="true"
+          form-view="work-center-form" grid-view="work-center-grid"/>
+      </insert>
+    </extend>
+  </form>
+
+  <action-method name="action-production-method-open-stock-location-planning">
+    <call class="com.axelor.apps.production.pro.web.MachineController"
+      method="openStockLocationPlanning"/>
+  </action-method>
+
+  <action-method name="action-production-method-open-machine-type-planning">
+    <call class="com.axelor.apps.production.pro.web.MachineController"
+      method="openMachineTypePlanning"/>
+  </action-method>
+
+  <action-method name="action-production-method-open-machine-planning">
+    <call class="com.axelor.apps.production.pro.web.MachineController"
+      method="openMachinePlanning"/>
+  </action-method>
+
+  <action-method name="action-production-pro-set-work-center-domain-on-machine">
+    <call class="com.axelor.apps.production.pro.web.MachineController"
+      method="setWorkCenterDomain"/>
+  </action-method>
+</object-views>

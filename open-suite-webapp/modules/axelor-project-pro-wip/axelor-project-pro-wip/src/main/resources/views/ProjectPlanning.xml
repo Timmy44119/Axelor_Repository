@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <form id="pro-project-planning-user-select-form" name="project-planning-user-select-form"
+    title="Select users" model="com.axelor.apps.base.db.Wizard">
+    <panel>
+      <field name="userSet" title="Users" type="many-to-many" colSpan="12"
+        target="com.axelor.auth.db.User" canNew="false"
+        onSelect="action-project-planning-attrs-project-domain"/>
+      <button name="showPlanning" title="Project Planning"
+        onClick="action-project-planning-method-show-planning" colSpan="3"/>
+      <!-- <button name="showTimeLine" title="Timeline" onClick="action-project-planning-method-show-timeline"
+        colSpan="3" /> -->
+    </panel>
+  </form>
+
+  <action-method name="action-project-planning-method-show-timeline">
+    <call class="com.axelor.apps.project.pro.web.ProjectPlanningController"
+      method="showTimeline"/>
+  </action-method>
+
+
+</object-views>

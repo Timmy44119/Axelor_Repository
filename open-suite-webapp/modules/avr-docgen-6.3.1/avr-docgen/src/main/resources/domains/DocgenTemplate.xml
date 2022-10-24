@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+    <module name="avr" package="com.avr.apps.docgen.db"/>
+    <entity name="DocgenTemplate" lang="java">
+        <string name="name" title="name" required="true" />
+        <many-to-one name="modelDefault" ref="com.axelor.meta.db.MetaFile" title="Model par default" />
+        <many-to-one name="docgenSubType" required="true" ref="com.avr.apps.docgen.db.DocgenSubType" title="Type" unique="true"/>
+        <string name="patternTitle" required="true" title="Pattern du titre"/>
+        <many-to-one name="metaModel" ref="com.axelor.meta.db.MetaModel" title="Modèle cible" readonly="true"/>
+        <one-to-many name="modelTemplateList" ref="com.avr.apps.docgen.db.DocgenModel" title="Model template" mappedBy="docgenTemplate"/>
+        <one-to-many name="docgenBindingRootList" ref="com.avr.apps.docgen.db.DocgenBinding" title="Root binding" mappedBy="docgenTemplate"/>
+        <one-to-many name="docgenBindingChildList" ref="com.avr.apps.docgen.db.DocgenChildBinding" title="Child binding" mappedBy="docgenTemplate"/>
+        <string name="relatedToSelect" title="Related to" selection="reference.model.binding.select" />
+        <long name="relatedToSelectId" />
+        <many-to-one name="partner" ref="com.axelor.apps.base.db.Partner" title="Customer" />
+        <many-to-one name="metaFileImportZip" ref="com.axelor.meta.db.MetaFile" title="Dossier d'import (zip)" transient="true"/>
+    </entity>
+
+</domain-models>

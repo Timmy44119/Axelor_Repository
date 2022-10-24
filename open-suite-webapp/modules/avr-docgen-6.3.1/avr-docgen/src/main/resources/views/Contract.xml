@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <form id="avr-docgen-contract-form" name="contract-form" title="Contract"
+          model="com.axelor.apps.contract.db.Contract"
+          extension="true">
+
+        <extend target="//button[@name='printContractBtn']" if-module="avr-docgen">
+            <attribute name="if" value="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableContract()"/>
+        </extend>
+
+        <extend target="//toolbar" if-module="avr-docgen">
+            <insert position="after">
+                <menubar>
+                    <menu name="saleOrderDocgenReportMenu" title="Reports" if-module="avr-docgen"
+                      if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableContract()" icon="fa-print">
+                        <item name="printContractPdf" title="Imprimer contrat"
+                                action="save,action-method-contract-print-contract"
+                                if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableContract()"/>
+                        <item name="printAndSaveContractPdf" title="Imprimer contrat et sauvegarder"
+                                action="save,action-method-contract-print-and-save-contract"
+                                if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableContract()"/>
+                    </menu>
+                    <menu title="Tools" if-module="avr-docgen" icon="fa-wrench">
+                        <item name="sendEmailWithAttachmentItem" title="Envoyer mail avec une pièce-jointe"
+                          readonlyIf="partner == null"
+                          action="save,action-show-email-wizard-for-send-mail" if-module="avr-docgen"
+                          if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableContract()"/>
+                    </menu>
+                </menubar>
+            </insert>
+        </extend>
+    </form>
+
+    <action-method name="action-method-contract-print-contract" if-module="avr-docgen"
+                   model="com.axelor.apps.contract.db.Contract">
+        <call class="com.avr.apps.docgen.web.ContractController" method="printContract"/>
+    </action-method>
+
+    <action-method name="action-method-contract-print-and-save-contract" if-module="avr-docgen"
+                   model="com.axelor.apps.contract.db.Contract">
+        <call class="com.avr.apps.docgen.web.ContractController" method="printAndSaveContract"/>
+    </action-method>
+
+</object-views>

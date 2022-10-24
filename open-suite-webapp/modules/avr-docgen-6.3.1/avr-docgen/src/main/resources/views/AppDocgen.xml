@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <form name="app-docgen-config-form" title="App docgen" model="com.axelor.apps.base.db.AppDocgen">
+        <toolbar>
+            <button name="importData" onClick="action-method-import-data-docgen" title="Importation des données"/>
+        </toolbar>
+        <panel title="Informations">
+            <field name="url" title="Url"/>
+            <field name="action" title="action"/>
+        </panel>
+
+        <panel-tabs>
+            <panel title="Activations">
+                <field name="enableSaleOrder" title="Activer les devis / commande / facture proforma ?" default="false" colSpan="4"/>
+                <field name="enablePurchaseOrder" title="Activer les commandes fournisseur ?" default="false" colSpan="4"/>
+                <field name="enableInvoice" title="Activer les facture, facture proforma, avoir ?" default="false" colSpan="4"/>
+                <field name="enableStockMove" title="Activer les bon de livraison / bon de retour ?" default="false" colSpan="4"/>
+                <field name="enableContract" title="Activer les contrats ?" default="false" colSpan="4"/>
+                <field name="enableLogisticalForm" title="Activer les fiche logistique ?" default="false" colSpan="4"/>
+            </panel>
+
+            <panel title="Configuration client" showIf="enableSaleOrder">
+                <field name="subTypeQuotation" requiredIf="enableSaleOrder" />
+                <field name="subTypeOrderCustomer" requiredIf="enableSaleOrder" />
+                <field name="subTypeSaleOrderProforma" requiredIf="enableSaleOrder" />
+            </panel>
+
+            <panel title="Configuration fournisseur" showIf="enablePurchaseOrder">
+                <field name="subTypePurchaseOrderOrder" requiredIf="enablePurchaseOrder" />
+            </panel>
+
+            <panel title="Configuration facturation" showIf="enableInvoice">
+                <field name="subTypeInvoiceProforma" requiredIf="enableInvoice" />
+                <field name="subTypeInvoiceRefunds" requiredIf="enableInvoice" />
+                <field name="subTypeInvoiceInvoice" requiredIf="enableInvoice" />
+                <field name="subTypeInvoiceSupplier" requiredIf="enableInvoice" />
+                <field name="subTypeInvoiceSupplierRefunds" requiredIf="enableInvoice" />
+            </panel>
+
+            <panel title="Configuration stock" showIf="enableStockMove">
+                <field name="subTypeStockMoveDeliveryNote" requiredIf="enableStockMove" />
+                <field name="subTypeStockMoveReturnVoucher" requiredIf="enableStockMove" />
+            </panel>
+
+            <panel title="Configuration contrat" showIf="enableContract">
+                <field name="subTypeContract" requiredIf="enableContract" />
+            </panel>
+
+            <panel title="Configuration fiche logistique" showIf="enableLogisticalForm">
+                <field name="subTypeLogisticalForm" requiredIf="enableLogisticalForm" />
+                <field name="subTypeLogisticalFormWithoutComponent" requiredIf="enableLogisticalForm" />
+            </panel>
+
+        </panel-tabs>
+    </form>
+
+    <action-method name="action-method-import-data-docgen">
+        <call class="com.avr.apps.docgen.web.AppDocgenController" method="importData"/>
+    </action-method>
+
+</object-views>

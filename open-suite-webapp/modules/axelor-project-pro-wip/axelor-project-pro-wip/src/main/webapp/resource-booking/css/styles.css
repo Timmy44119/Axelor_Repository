@@ -1,0 +1,602 @@
+*{
+    font-family:  Roboto, Arial, sans-serif !important;
+}
+
+html, body{
+  margin:0;
+  padding:0;
+  height:100%;
+  background:#f2f2f2;
+  font-family: Roboto, serif;
+  font-size: 14px;
+  line-height: 1.43;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+#wrapper{
+    display: flex;
+    width: 100%;    
+}
+#search-panel{
+    flex: 0 0 220px;
+    margin:10px 10px 10px 10px;
+}
+#scheduler_here{
+    width:100%;
+    height:calc(100% - 16px);
+    background: white;
+    order: 2;
+    flex:10;
+    margin:10px 8px 8px 0px;
+}
+#search-panel form,
+.search_form{
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+}
+
+.form_head{
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.hd_line{
+    height:1px;
+    width:100%;
+    margin:10px 0 20px;
+}
+.search_form{
+    padding:14px 12px;
+    box-sizing: border-box;
+    background-color: white;
+}
+.search_title{
+    font-weight: 500;
+}
+.message{
+    text-align:right;
+    color:White;
+    font-size:18px;
+    height:24px;
+    padding:5px;
+}
+.car_brand, .car_price{
+    border-left:none !important;
+    overflow:hidden;
+}
+.resource_price{
+    color: gray;
+}
+div.car_price{
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 100%;
+    height: 14px;
+    line-height: 14px;
+    margin-top: -2px;
+    text-align:center;
+    width:100%;
+}
+div.car_brand{
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 100%;
+    height: 15px;
+    white-space:nowrap;
+}
+
+.search_form{
+    border:none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 35%;
+}
+
+.dhx_cal_navline{
+    box-shadow: 0 1px 2px 2px #FFF;
+}
+.dhx_cal_header{
+    top: 70px;
+    width:100% !important;
+}
+
+.dhx_matrix_now_time{
+    display: none;
+}
+.dhx_cal_header div div{
+    border-left:1px solid #CECECE;
+    border-right: 1px solid #CECECE;
+}
+
+.dhx_cal_event_line {
+    line-height: 17px;
+    font-size: 14px;
+    background-color:#FFAF4A;
+}
+
+.dhx_data_table.folder .dhx_matrix_cell, .dhx_matrix_scell.folder{
+    background-color: #E6E6E6;
+}
+
+.dhx_nav_container{
+    text-align: center;
+    width: 100%;
+}
+
+.dhx_cal_navline div {
+    position: initial;
+    white-space: pre-wrap;
+}
+
+.dhx_cal_navline{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    height: auto !important;
+    top: 18px !important;
+}
+.dhx_cal_navline .dhx_cal_date{
+    position: initial
+}
+
+.dhx_cal_prev_button{
+    background-image: url("./../content/arrow_left.png") !important;
+    background-repeat: no-repeat !important; 
+    border-right: none !important;
+}
+
+.dhx_cal_next_button{
+    background-image: url("./../content/arrow_right.png") !important;
+    background-repeat: no-repeat !important; 
+    margin-right: 20px;
+}
+
+.dhtmlx-error div{
+    display: none;
+}
+
+.dhtmlx_message_area{
+    display: none;    
+}
+
+.dhx_cal_prev_button:after, .dhx_cal_next_button:after {
+    border: 2px solid #868686;
+    display: block;
+    height: 7px;
+    margin-top: -5px;
+    position: absolute;
+    transform: rotate(45deg);
+    top: 50%;
+    width: 7px;
+}
+
+.dhx_cal_prev_button:after {
+    border-right: none;
+    border-top: none;
+    left: 50%;
+}
+
+.dhx_cal_next_button:after {
+    border-left: none;
+    border-bottom: none;
+    right: 50%;
+}
+
+.dhx_scheduler_timeline :-webkit-any-link{
+    text-decoration: unset;
+    color: #747473 !important
+}
+
+.dhx_scheduler_timeline .dhx_scale_bar {
+    line-height: 34px;
+}
+
+.dhx_scheduler_timeline .dhx_cal_data{
+    top:100px !important;
+}
+
+.dhx_scheduler_timeline .dhx_cal_header{
+    height: 28px !important;
+    top: 70px !important;
+}
+
+.dhx_scheduler_week_timeline .dhx_cal_header{
+    height: 28px !important;
+    top: 70px !important;
+}
+
+.dhx_scheduler_week_timeline .dhx_cal_data{
+    top:100px !important;
+}
+
+.dhx_scheduler_two_week_timeline .dhx_cal_header{
+    height: 28px !important;
+    top: 70px !important;
+}
+
+.dhx_scheduler_two_week_timeline .dhx_cal_data{
+    top:100px !important;
+}
+
+.dhx_scheduler_month_timeline .dhx_cal_header{
+    height: 28px !important;
+    top: 70px !important;
+}
+
+.dhx_scheduler_month_timeline .dhx_cal_data{
+    top:100px !important;
+}
+.dhx_cal_navline .dhx_cal_date{
+    width: 80%;
+}
+.dhx_cal_today_button {
+    color: #747473;
+    left: auto;
+    right: 123px;
+    background: 0 0;
+    text-decoration: none;
+    width: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: arial;
+    margin-right: 15px;
+}
+
+.dhx_cal_tab {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 32px;
+    width: 50px;
+}
+
+.dhx_cal_tab.active, .dhx_cal_tab, .dhx_cal_today_button {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.dhx_cal_tab.active {
+    text-shadow: none;
+    background-color: #F0EDE7;
+    color: #454544;
+    border: 1px solid #CECECE;
+    text-shadow: 0 2px 0 #fff;
+}
+
+.dhx_cal_tab_first{
+    border-right: none !important;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.dhx_cal_tab_last{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: none !important;    
+}
+
+#lightbox_form {
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    display: none;
+    height: 409px;
+    padding: 30px 26px 20px 28px;
+    position: absolute;
+    width: 405px;
+    z-index: 10001;
+}
+
+.lightbox_left_section, .lightbox_right_section {
+    display: inline-block;
+    height: auto;
+    line-height: 32px;
+    min-height: 32px;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+}
+
+.lightbox_left_section {
+    margin-bottom: 15px;
+    width: 70px;
+}
+
+.lightbox_left_section label {
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.lightbox_left_section:nth-child(3),
+.lightbox_right_section:nth-child(4) {
+    margin-bottom: 20px;
+}
+
+.lightbox_right_section {
+    margin-bottom: 15px;
+    padding-left: 1px;
+    width: 275px;
+}
+
+#lightboxStatus {
+    margin-bottom: 19px;
+}
+
+.lightbox_text_field {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, serif;
+    font-size: 14px;
+    height: 32px;
+    outline: solid 1px rgba(0, 0, 0, 0.08);
+    outline-offset: -1px;
+    padding: 1px 5px 1px 10px;
+    width: 100%;
+}
+
+.lightbox_select_field{
+    margin-left: 0;
+    width: 100%;
+}
+
+.dhx_minical_popup{
+    z-index: 10001;
+}
+
+.date_time_selector {
+    margin-top: 7px;
+    position: relative;
+}
+
+.search_form .date_calendar,
+.lightbox_date_select .date_calendar {
+    bottom: 2px;
+    left: 7px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+}
+
+.lightbox_date_select .date_text {
+    background-color: rgba(0, 0, 0, 0);
+    border: solid 1px rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 14px;
+    height: 32px;
+}
+
+.lightbox_date_select .date_text {
+    box-sizing: border-box;
+    padding: 1px 5px 1px 30px;
+    vertical-align: middle;
+    width: 113px;
+}
+
+.lightbox_buttons {
+    margin-top: 19px;
+}
+
+.lightbox_buttons .lightbox_right_section {
+    text-align: right;
+}
+
+.lightbox_buttons .lightbox_button:not(:last-child) {
+    margin-right: 16px;
+}
+
+.lightbox_left_section .lightbox_button {
+    margin-left: -16px;
+}
+
+.lightbox_button:not(.lightbox_button_active):hover {
+    background-color: rgba(153, 153, 153, 0.2);
+}
+
+.lightbox_button {
+    background: none;
+    border: none;
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.54);
+    cursor: pointer;
+    font-family: Roboto, serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 32px;
+    padding: 0 16px;
+}
+
+.lightbox_button_active {
+    color: #ffffff;
+    background-color: #0097a7;
+}
+
+.dhx_rent_reservation {
+    background-color: #ef6c00;
+}
+
+.dhx_rent_prepaid {
+    background-color: #ba68c8;
+}
+
+.dhx_rent_payed {
+    background-color: #0097a7;
+}
+
+.dhtmlXTooltip.tooltip {
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, serif;
+    line-height: 22px;
+    font-size: 14px;
+}
+
+.dhx_cell_holiday {
+    background-color: #fafafa;
+}
+
+.dhx_scale_bar {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    line-height: 12px;
+    height: 30px !important;
+}
+
+.dhx_cal_event_line .dhx_event_resize {
+    background-repeat: no-repeat;
+    padding-right: 7px;
+    opacity: 0.6;
+}
+
+div.event-bar-text {
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 15px);
+}
+
+.dhx_matrix_scell, .dhx_matrix_cell {
+    border-color: #EDEDED;
+}
+.dhx_cal_tab[name=timeline_tab] {
+    margin-left: 60px !important;
+    width: 60px !important;
+}
+.dhx_cal_tab[name=week_timeline_tab] {
+    line-height: 1.3 !important;
+    border-radius: initial;
+    width: 40px;
+    border-right: none !important;
+}
+
+.dhx_cal_tab[name=two_week_timeline_tab] {
+    line-height: 1.3 !important;
+    border-radius: initial;
+    width: 40px;
+}
+
+.dhx_cal_tab[name=month_timeline_tab] {
+    width: 60px !important;
+}
+
+.dhx_matrix_scell.folder{
+    background-color: #ffffff !important;
+}
+
+.virtual_event {
+    opacity: 0.8;
+    cursor: default;
+}
+
+.open_type{
+    text-align: right !important;
+    margin-right: 10px;
+}
+
+.dhx_scell_level0{
+    position: relative;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.dhx_matrix_scell.folder .dhx_scell_expand{
+    display: none;
+}
+
+.dhx_matrix_scell .dhx_scell_level0{
+    padding-left: 0px !important;
+}
+
+.dhx_matrix_scell.item .dhx_scell_name{
+    text-align: center !important;
+}
+
+.dhx_row_item{
+    height: 38px !important;
+}
+
+.col8{
+    display: flex;
+    width: 85%;
+}
+
+.col2{
+    flex: 1 !important;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.controls{
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.button{
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: white
+}
+
+.dhx_cal_next_button, .dhx_cal_prev_button{
+    width: 55px;
+}
+
+.button-div{
+    text-align: center;
+}
+
+.dhx_cal_event_line .dhx_event_resize{
+    background-image: none;
+}
+
+/* responsive design */
+
+@media screen and (max-width: 870px) {
+
+    .dhx_cal_date {
+        font-size: 13px;
+    }
+
+    .dhx_cal_tab.active, .dhx_cal_tab, .dhx_cal_today_button{
+        font-size: 10px;    
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    .dhx_scale_bar {
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 1260px) {
+
+    .search_form{
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 1516px) {
+    .search_form{
+        height: 42%;
+    }
+}

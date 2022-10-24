@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+	<module name="base" package="com.axelor.apps.base.db"/>
+
+	<entity name="AppDocgen">
+
+		<one-to-one ref="com.axelor.apps.base.db.App" name="app"/>
+
+		<string name="url" required="true" title="Url" />
+		<string name="action" required="true" title="Action" />
+
+		<boolean name="enableSaleOrder" title="Activer les devis / commande / facture proforma ?" default="false"/>
+		<boolean name="enablePurchaseOrder" title="Activer les commandes fournisseur ?" default="false"/>
+		<boolean name="enableInvoice" title="Activer les facture, facture proforma, avoir ?" default="false"/>
+		<boolean name="enableStockMove" title="Activer les bon de livraison / bon de retour ?" default="false"/>
+		<boolean name="enableContract" title="Activer les contrats ?" default="false"/>
+		<boolean name="enableLogisticalForm" title="Activer les fiche logistique ?" default="false"/>
+
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeQuotation" title="Devis" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeOrderCustomer" title="Commandes client" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeSaleOrderProforma" title="Facture proforma" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypePurchaseOrderOrder" title="Commandes fournisseur" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeInvoiceProforma" title="Facture proforma" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeInvoiceRefunds" title="Avoirs" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeInvoiceInvoice" title="Factures" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeInvoiceSupplier" title="Facture fournisseur" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeInvoiceSupplierRefunds" title="Avoir fournisseur" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeStockMoveDeliveryNote" title="Bon de livraison" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeStockMoveReturnVoucher" title="Bon de retour" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeContract" title="Contrat" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeLogisticalForm" title="Fiche logistique" />
+		<many-to-one ref="com.avr.apps.docgen.db.DocgenSubType" name="subTypeLogisticalFormWithoutComponent" title="Fiche logistique sans composant" />
+
+		<track>
+			<field name="url" on="UPDATE"/>
+			<field name="enableSaleOrder" on="UPDATE"/>
+			<field name="enableInvoice" on="UPDATE"/>
+			<field name="enableStockMove" on="UPDATE"/>
+			<field name="subTypeQuotation" on="UPDATE"/>
+			<field name="subTypeOrderCustomer" on="UPDATE"/>
+			<field name="subTypeSaleOrderProforma" on="UPDATE"/>
+			<field name="subTypePurchaseOrderOrder" on="UPDATE"/>
+			<field name="subTypeInvoiceProforma" on="UPDATE"/>
+			<field name="subTypeInvoiceRefunds" on="UPDATE"/>
+			<field name="subTypeInvoiceInvoice" on="UPDATE"/>
+			<field name="subTypeInvoiceSupplier" on="UPDATE"/>
+			<field name="subTypeInvoiceSupplierRefunds" on="UPDATE"/>
+			<field name="subTypeStockMoveDeliveryNote" on="UPDATE"/>
+			<field name="subTypeContract" on="UPDATE"/>
+			<field name="subTypeLogisticalForm" on="UPDATE"/>
+			<field name="subTypeLogisticalFormWithoutComponent" on="UPDATE"/>
+		</track>
+
+   	</entity>
+
+</domain-models>

@@ -1,0 +1,28 @@
+apply plugin: "com.axelor.app-module"
+
+//apply from: "../version.gradle"
+
+apply {
+//	version = absVersion
+	version = "1.0.0"
+}
+
+axelor {
+	title "Axelor :: Project pro"
+	description "Axelor Project Pro with timeline view for planning"
+
+	removable false
+}
+
+dependencies {
+	compile project(":modules:axelor-project")
+}
+
+task copyWebapp(type: Copy) {
+	destinationDir = file(rootProject.buildDir)
+	into("webapp/project-pro") {
+		from "src/main/webapp"
+	}
+}
+
+rootProject.tasks.war.dependsOn copyWebapp

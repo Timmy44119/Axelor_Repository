@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid id="avr-docgen-purchase-order-grid" name="purchase-order-grid" title="Purchase orders"
+		  model="com.axelor.apps.purchase.db.PurchaseOrder" extension="true">
+		<extend target="//field[@name='supplierPartner']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" width="400"
+					   if-module="avr-docgen"
+					   if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+			</insert>
+		</extend>
+	</grid>
+
+	<grid id="avr-docgen-purchase-order-quotation-grid" name="purchase-order-quotation-grid"
+		  title="Sale quotations" model="com.axelor.apps.purchase.db.PurchaseOrder" extension="true">
+		<extend target="//field[@name='supplierPartner']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" width="400"
+					   if-module="avr-docgen"
+					   if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+			</insert>
+		</extend>
+	</grid>
+
+	<form id="avr-docgen-purchase-order-form" name="purchase-order-form" title="Supplier RFQ/PO"
+		  model="com.axelor.apps.purchase.db.PurchaseOrder" extension="true">
+
+		<extend target="//button[@name='reportsBtn']" if-module="avr-docgen">
+			<attribute name="if" value="clientPartner == null || (__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnablePurchaseOrder())" />
+		</extend>
+
+		<extend target="//toolbar" if-module="avr-docgen">
+			<replace></replace>
+		</extend>
+
+		<extend target="//menu[@name='purchaseOrderToolsMenu']" if-module="avr-docgen">
+			<insert position="after">
+				<menu name="docgenReports" title="Reports" icon="fa-print">
+					<item name="printItem" title="Print" hideIf="supplierPartner == null"
+						  action="save,action-purchase-order-method-show-purchase-order"
+						  if-module="avr-docgen"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+					<item name="printAndSaveItem" title="Imprimer et sauvegarder"
+						  hideIf="supplierPartner == null"
+						  action="save,action-purchase-order-method-save-purchase-order"
+						  if-module="avr-docgen"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+				</menu>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='sendEmailItem']" if-module="avr-docgen">
+			<insert position="after">
+				<item name="sendEmailWithAttachmentItem" title="Envoyer mail avec une pièce-jointe"
+					  readonlyIf="supplierPartner == null"
+					  if-module="avr-docgen"
+					  action="save,action-show-email-wizard-for-send-mail"
+					  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+			</insert>
+		</extend>
+
+		<extend target="//field[@name='amountToBeSpreadOverTheTimetable']" if-module="avr-docgen">
+			<insert position="before">
+				<field name="deadlineDate"
+					   if-module="avr-docgen"
+					   if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+			</insert>
+		</extend>
+
+		<extend target="//field[@name='deliveryDate']">
+			<attribute name="onChange"
+					   value="action-avr-purchase-order-payment-condition-on-change"/>
+		</extend>
+
+		<extend target="//field[@name='paymentCondition']">
+			<replace>
+				<field if="__config__.app.isApp('supplychain')" if-module="axelor-account"
+					   name="paymentCondition"
+					   colSpan="6" canEdit="false" form-view="payment-condition-form"
+					   grid-view="payment-condition-grid"
+					   onChange="action-avr-purchase-order-payment-condition-on-change"/>
+			</replace>
+		</extend>
+
+		<extend target="//field[@name='versionNumber']">
+			<insert position="after">
+				<field name="title" if-module="avr-docgen"
+					   if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()" colSpan="12"/>
+			</insert>
+		</extend>
+
+	</form>
+
+	<action-group name="action-group-purchase-order-method-show-purchase-order"
+				  if-module="avr-docgen">
+		<action name="action-purchase-order-method-show-purchase-order"
+				if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+		<action name="action-purchase-order-custom-method-show-purchase-order"
+				if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnablePurchaseOrder()"/>
+	</action-group>
+
+	<action-method name="action-purchase-order-custom-method-show-purchase-order">
+		<call class="com.avr.apps.docgen.web.PurchaseOrderController" method="showPurchaseOrder"/>
+	</action-method>
+
+	<action-method name="action-purchase-order-method-save-purchase-order">
+		<call class="com.avr.apps.docgen.web.PurchaseOrderController" method="savePurchaseOrder"/>
+	</action-method>
+
+
+	<action-method name="action-avr-purchase-order-payment-condition-on-change">
+		<call class="com.avr.apps.docgen.web.PurchaseOrderController" method="computedDeadLine"/>
+	</action-method>
+
+	<action-method id="avr-docgen-action-purchase-order-method-show-purchase-order" name="action-purchase-order-method-show-purchase-order">
+		<call method="showPurchaseOrder" class="com.avr.apps.docgen.web.PurchaseOrderController"/>
+	</action-method>
+
+
+</object-views>

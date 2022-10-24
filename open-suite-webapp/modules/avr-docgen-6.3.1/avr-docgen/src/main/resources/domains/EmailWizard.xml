@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+    <module name="base" package="com.avr.apps.base.db"/>
+    <entity name="EmailWizard" lang="java" persistable="false">
+        <many-to-one name="template" ref="com.axelor.apps.message.db.Template" title="Template" required="true"/>
+        <many-to-one name="emailAccount" ref="com.axelor.apps.message.db.EmailAccount" title="Compte de mail" required="true"/>
+        <one-to-many name="metaFileList" ref="com.axelor.meta.db.MetaFile" required="true" title="Pièce-jointes"/>
+        <string name="entity" readonly="true" />
+        <string name="identities" readonly="true" />
+    </entity>
+</domain-models>

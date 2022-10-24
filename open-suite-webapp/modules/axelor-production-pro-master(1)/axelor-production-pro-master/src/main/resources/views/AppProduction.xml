@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <form id="pro-app-production-config-form" extension="true" name="app-production-config-form"
+    title="App production" model="com.axelor.apps.base.db.AppProduction" canDelete="false"
+    canNew="false" width="large">
+
+    <extend target="//panel[@name='mpsPanel']">
+      <insert position="after">
+        <panel name="planificationPanel" title="Planification">
+          <help>
+            Groovy expressions to evaluate the color of the header and the content of the
+            operation order cards
+            present in micro planification's screen
+          </help>
+          <field name="cardHeaderColor"/>
+          <field name="cardContentColor"/>
+        </panel>
+      </insert>
+    </extend>
+
+  </form>
+
+</object-views>

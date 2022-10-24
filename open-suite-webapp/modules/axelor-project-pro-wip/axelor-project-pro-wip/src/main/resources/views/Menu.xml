@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <action-view id="pro.project.resource" name="project.resource" title="Resources"
+    model="com.axelor.apps.project.db.Resource">
+    <view type="grid" name="resource-grid"/>
+    <view type="form" name="resource-form"/>
+    <domain>self.isModel = false OR self.isModel = null</domain>
+  </action-view>
+
+
+  <menuitem name="project-resource-model" title="Resource Models" order="31"
+    parent="menu-project-root" action="project.resource.model"
+    if="__config__.app.getApp('project').getResourceManagement()"/>
+  <action-view name="project.resource.model" title="Resource Models"
+    model="com.axelor.apps.project.db.Resource">
+    <view type="grid" name="resource-grid"/>
+    <view type="form" name="resource-form"/>
+    <view-param name="forceTitle" value="true"/>
+    <domain>self.isModel = true</domain>
+    <context name="_isModel" expr="eval:true"/>
+  </action-view>
+
+
+  <menuitem name="project-resource-booking-mgt" title="Resource booking mgt" order="36"
+    parent="menu-project-root" action="project.resource.booking.mgt"
+    if="__config__.app.getApp('project').getResourceManagement()"/>
+  <action-view name="project.resource.booking.mgt" title="Resource booking mgt"
+    model="com.axelor.apps.project.db.ResourceBooking">
+    <view type="html" name="project-pro/resource-booking"/>
+    <view-param name="show-toolbar" value="false"/>
+  </action-view>
+
+
+</object-views>

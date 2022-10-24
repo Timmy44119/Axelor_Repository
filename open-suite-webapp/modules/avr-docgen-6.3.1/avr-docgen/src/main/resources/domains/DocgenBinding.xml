@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+    <module name="avr" package="com.avr.apps.docgen.db"/>
+    <entity name="DocgenBinding" lang="java">
+        <string name="keyBinding" title="Clé" required="true"/>
+        <enum name="typeTemplate" ref="TypeTemplate" title="Type" required="true" default="FIELD"/>
+        <string name="query" title="Query" large="true"/>
+        <enum name="typeData" ref="TypeData" default="STANDARD"/>
+        <boolean name="hasDateOnlyReturning" title="Prendre la date seulement ?" default="false" />
+        <many-to-one name="metaField" title="Choix du champs" ref="com.axelor.meta.db.MetaField" />
+        <many-to-one name="docgenTemplate" ref="com.avr.apps.docgen.db.DocgenTemplate" />
+        <many-to-one name="docgenChildBinding" ref="com.avr.apps.docgen.db.DocgenChildBinding" />
+        <string name="targetField" title="Champ cible"
+                help="Lors de la recherche de l'élément (si c'est une relation), le système recherchera sur le champs séléctionné"
+                readonly="true"/>
+        <integer name="bigDecimalScale" title="Echelle" default="2" />
+        <boolean name="isJoiningResult" title="Joindre le resultat ?" />
+        <string name="joiningSeparator" title="Separateur" />
+    </entity>
+
+    <enum name="TypeTemplate">
+        <item name="QUERY" title="HQL" value="QUERY"/>
+        <item name="QUERY_NATIVE" title="SQL" value="QUERY_NATIVE"/>
+        <item name="FIELD" title="Field" value="FIELD"/>
+    </enum>
+
+    <enum name="TypeData">
+        <item name="STANDARD" title="Standard" value="STANDARD"/>
+        <item name="LOCALDATE" title="Date" value="LOCALDATE"/>
+        <item name="BIGDECIMAL" title="Decimal" value="BIGDECIMAL"/>
+        <item name="LOCALDATETIME" title="Datetime" value="LOCALDATETIME"/>
+        <item name="PICTURE" title="Picture" value="PICTURE"/>
+        <item name="HTML" title="Html" value="HTML"/>
+        <item name="HTML_IMAGE" title="Html Image" value="HTML_IMAGE"/>
+    </enum>
+
+</domain-models>

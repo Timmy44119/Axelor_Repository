@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid id="avr-docgen-invoice-grid" name="invoice-grid" title="Invoices"
+	  model="com.axelor.apps.account.db.Invoice" extension="true">
+		<extend target="//item[@name='printInvoicesItem']" if-module="avr-docgen">
+			<attribute name="action" value="action-group-invoice-method-show-invoice"/>
+		</extend>
+
+		<extend target="//field[@name='partner.name']" if-module="avr-docgen">
+			<insert position="after">
+				<field name="title" title="Titre" width="600" if-module="avr-docgen"
+				  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableInvoice()"/>
+			</insert>
+		</extend>
+
+	</grid>
+
+
+	<form id="avr-docgen-invoice-form" name="invoice-form" title="Invoice"
+	  model="com.axelor.apps.account.db.Invoice" extension="true">
+
+		<extend target="//menu[@name='invoiceToolsMenu']" if-module="avr-docgen">
+			<insert position="after">
+				<menubar>
+					<menu name="saleOrderDocgenReportMenu" title="Reports" if-module="avr-docgen"
+					  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableSaleOrder()" icon="fa-print">
+						<item name="reportsBtn" title="Reports" showIf="statusSelect != 4"
+						  readonlyIf="!id" action="save,action-invoice-view-reports-wizard"
+						  if="__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableInvoice()"/>
+						<item name="printInvoice" title="Imprimer facture"
+						  showIf="statusSelect != 4" readonlyIf="!id"
+						  action="save,avr-docgen-action-invoice-method-print-invoice"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableInvoice()"/>
+						<item name="printAndSaveInvoice" title="Imprimer facture et sauvegarder"
+						  showIf="statusSelect != 4" readonlyIf="!id"
+						  action="save,avr-docgen-action-invoice-method-save-print-invoice"
+						  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableInvoice()"/>
+					</menu>
+				</menubar>
+			</insert>
+		</extend>
+
+		<extend target="//toolbar" if-module="avr-docgen">
+			<replace></replace>
+		</extend>
+
+		<extend target="//panel[@name='subscriptionPanel']" if-module="avr-docgen">
+			<insert position="after">
+				<panel colSpan="12" name="titleInformation">
+					<field name="title" colSpan="12" title="Titre"
+					  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableInvoice()" if-module="avr-docgen"/>
+				</panel>
+			</insert>
+		</extend>
+
+		<extend target="//item[@name='sendEmailItem']" if-module="avr-docgen">
+			<insert position="after">
+				<item name="sendEmailWithAttachmentItem" title="Envoyer mail avec une pièce-jointe"
+				  readonlyIf="partner == null" action="save,action-show-email-wizard-for-send-mail" if-module="avr-docgen"
+				  if="__config__.app.isApp('docgen') &amp;&amp; __config__.app.getApp('docgen')?.getEnableInvoice()"/>
+			</insert>
+		</extend>
+
+		<extend target="//button[@name='reportsBtn']" if-module="avr-docgen">
+			<attribute name="if" value="clientPartner == null || (__config__.app.isApp('docgen') &amp;&amp; !__config__.app.getApp('docgen')?.getEnableInvoice())" />
+		</extend>
+
+	</form>
+
+	<action-method name="avr-docgen-action-invoice-method-print-invoice">
+		<call class="com.avr.apps.docgen.web.InvoiceController" method="printAndShowInvoice"/>
+	</action-method>
+
+	<action-method name="avr-docgen-action-invoice-method-save-print-invoice">
+		<call class="com.avr.apps.docgen.web.InvoiceController" method="printAndSaveInvoice"/>
+	</action-method>
+
+
+</object-views>

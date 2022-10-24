@@ -1,0 +1,13 @@
+docgenSubType.importId;subType;name;importId;patternTitle;metaModel.fullName;modelDefault
+9;com.axelor.apps.stock.db.StockMove-return.voucher;Bon de retour;9;%TR-%CN;com.axelor.apps.stock.db.StockMove;ReturningVoucher.docx
+7;com.axelor.apps.purchase.db.PurchaseOrder-order.supplier;Commande founisseur;10;%TR-%CN;com.axelor.apps.purchase.db.PurchaseOrder;OrderPurchaseOrder.docx
+8;com.axelor.apps.stock.db.StockMove-delivery.note;Bon de livraison;8;%TR-%CN;com.axelor.apps.stock.db.StockMove;DeliveryNote.docx
+2;com.axelor.apps.account.db.Invoice-invoice;Facture;7;%TR-%S-%CN;com.axelor.apps.account.db.Invoice;Facture.docx
+5;com.axelor.apps.sale.db.SaleOrder-proforma;Facture proforma venant du devis;5;%TR-%S-%CN;com.axelor.apps.sale.db.SaleOrder;FactureProformaDevis.docx
+3;com.axelor.apps.account.db.Invoice-proforma;Facture proforma venant d'une facture;4;%TR-%S-%CN;com.axelor.apps.account.db.Invoice;Facture.docx
+6;com.axelor.apps.sale.db.SaleOrder-order.customer;Commande;6;%TR-%S-%CN;com.axelor.apps.sale.db.SaleOrder;Commande.docx
+4;com.axelor.apps.sale.db.SaleOrder-quotation;Devis;1;%TR-%S-%CN;com.axelor.apps.sale.db.SaleOrder;Devis.docx
+1;com.axelor.apps.account.db.Invoice-refunds;Avoir;11;%TR-%S-%CN;com.axelor.apps.account.db.Invoice;Facture.docx
+24;;Fiche logistique;34;%TR-%S-%CN;com.axelor.apps.stock.db.LogisticalForm;PackingList.docx
+26;;Fiche logistique sans composant;36;%TR-%S-%CN;com.axelor.apps.stock.db.LogisticalForm;PackingListWithoutComponent.docx
+28;;Contrat;37;%TR-%S-%CN;com.axelor.apps.contract.db.Contract;Contract.docx

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+    <grid name="avr-docgen-template-grid" title="Docgen  templates" model="com.avr.apps.docgen.db.DocgenTemplate">
+        <menubar>
+            <menu title="Import/export données">
+                <item title="Importer les données docgen" action="action-method-show-view-import-wizard" />
+                <item title="Exporter les données docgen" action="action-method-docgen-export-data" />
+            </menu>
+        </menubar>
+        <field name="name" title="name"/>
+        <field name="docgenSubType"/>
+        <field name="patternTitle"/>
+        <field name="metaModel" title="Modèle cible"/>
+        <field name="modelDefault" title="Model par default"/>
+    </grid>
+
+    <form name="avr-docgen-template-form" title="Docgen template" model="com.avr.apps.docgen.db.DocgenTemplate" width="large">
+        <toolbar>
+            <button name="testTemplate" title="Tester le template" onClick="save,action-docgen-template-test-template" showIf="docgenSubType != null"/>
+        </toolbar>
+        <panel name="tooltips" title="Tips Pattern" itemSpan="4" collapseIf="true" colSpan="12">
+            <label name="TypeReportTips" title="%TR : Type du report" />
+            <label name="simpleNameCustomerTips" title="%CN: Nom simple du tier" />
+            <label name="fullNameCustomerTips" title="%CFN: Nom complet du tier" />
+            <label name="sequenceTips" title="%S: Séquence" />
+            <label name="dayTips" title="%D : Jour en chiffre" />
+            <label name="monthTips" title="%M : Mois en chiffre" />
+            <label name="yearTips" title="%Y: année en chiffre en entier" />
+            <label name="hourTips" title="%h : Heure" />
+            <label name="minuteTips" title="%m: minute" />
+            <label name="secondTips" title="%s : seconde" />
+        </panel>
+        <panel colSpan="12" title="Information">
+            <field name="docgenSubType" onChange="action-get-meta-model-by-sub-type, action-record-docgen-template-get-name-if-empty"/>
+            <field name="patternTitle" required="true"/>
+            <field name="name" title="name"/>
+            <field name="metaModel" title="Modèle cible" onSelect="action-avr-docgen-get-domain-sub-type"/>
+            <field name="modelDefault" title="Model par default" widget="binary-link"/>
+            <field name="modelTemplateList" title="Model template" colSpan="12"/>
+        </panel>
+        <panel-tabs>
+            <panel title="Association parent" name="associateParents" showIf="metaModel != null">
+                <field name="docgenBindingRootList" title="Association du parent" colSpan="12"
+                       height="500"/>
+            </panel>
+            <panel title="Association enfants" name="associateChilds" showIf="metaModel != null">
+                <field name="docgenBindingChildList" title="Association des enfants" colSpan="12"
+                       height="500"/>
+            </panel>
+        </panel-tabs>
+    </form>
+
+    <form title="Import Wizard" name="avr-docgen-import-wizard-form" model="com.avr.apps.docgen.db.DocgenTemplate">
+        <panel>
+            <field name="metaFileImportZip" widget="binary-link"/>
+            <button name="importBtn" onClick="action-method-docgen-import-data" title="Importer les données" />
+        </panel>
+    </form>
+
+    <form name="avr-docgen-template-wizard-form" title="Docgen template wizard"
+          model="com.avr.apps.docgen.db.DocgenTemplate" onNew="action-get-data-wizard">
+        <panel>
+            <field name="relatedToSelect" colSpan="12" widget="RefSelect" x-related="relatedToSelectId"
+                   onChange="action-docgen-get-list-of-partner"/>
+            <field name="partner" required="true"/>
+            <field name="$idTemplate" required="true" hidden="true"/>
+            <button name="startTest" title="Lancer le test" onClick="save,action-test-template-docgen"/>
+        </panel>
+    </form>
+
+    <action-method name="action-method-show-view-import-wizard">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="showViewImportWizard"/>
+    </action-method>
+
+    <action-method name="action-method-docgen-import-data">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="importData"/>
+    </action-method>
+
+    <action-method name="action-method-docgen-export-data">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="exportData"/>
+    </action-method>
+
+    <action-record name="action-record-docgen-template-get-name-if-empty" model="com.avr.apps.docgen.db.DocgenTemplate">
+        <field name="name" expr="eval: docgenSubType.name" if="name == null"/>
+    </action-record>
+
+    <action-method name="action-test-template-docgen">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="startTest"/>
+    </action-method>
+
+    <action-method name="action-get-meta-model-by-sub-type">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="getMetaModelBySubType"/>
+    </action-method>
+
+    <action-method name="action-docgen-get-list-of-partner">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="getListOfPartner"/>
+    </action-method>
+
+    <action-method name="action-avr-docgen-get-domain-meta-model">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="getDomainMetaModel"/>
+    </action-method>
+
+    <action-record name="action-get-data-wizard" model="com.avr.apps.docgen.db.DocgenTemplate">
+        <field name="relatedToSelect" expr="eval: _relatedToSelect"/>
+    </action-record>
+
+    <action-method name="action-docgen-template-test-template">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="showWizard"/>
+    </action-method>
+
+    <action-method name="action-docgen-start-test-template">
+        <call class="com.avr.apps.docgen.web.DocgenTemplateController" method="startTest"/>
+    </action-method>
+
+</object-views>

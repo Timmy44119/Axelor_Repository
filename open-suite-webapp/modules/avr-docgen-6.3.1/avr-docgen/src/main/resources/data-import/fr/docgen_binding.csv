@@ -1,0 +1,506 @@
+typeTemplate;targetField;importId;hasDateOnlyReturning;typeData;"query";keyBinding;bigDecimalScale;docgenTemplateImportId;docgenChildBindingImportId;metaFieldElement
+FIELD;saleOrderSeq;1;false;STANDARD;;seq;0;1;0;com.axelor.apps.sale.db.SaleOrder-saleOrderSeq
+FIELD;deliveryComments;2;false;STANDARD;;noteFromSaleOrder;0;1;0;com.axelor.apps.sale.db.SaleOrder-deliveryComments
+FIELD;creationDate;3;true;LOCALDATE;;createdOn;0;1;0;com.axelor.apps.sale.db.SaleOrder-creationDate
+FIELD;salespersonUser.name;4;false;STANDARD;;assignUserName;0;1;0;com.axelor.auth.db.User-name
+QUERY;0;5;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :salespersonUser.partner.id";assignUserPhone;0;1;0;0
+FIELD;salespersonUser.partner.emailAddress.address;6;false;STANDARD;;assignUserMail;0;1;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;clientPartner.name;7;false;STANDARD;;customerName;0;1;0;com.axelor.apps.base.db.Partner-name
+FIELD;deliveryAddressStr;8;false;STANDARD;;customerAddressStr;0;0;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;contactPartner.name;9;false;STANDARD;;contactDeliveryName;0;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;contactPartner.firstName;10;false;STANDARD;;contactDeliveryFirstname;0;0;0;com.axelor.apps.base.db.Partner-firstName
+QUERY;contactPartner;11;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :contactPartner.id";customerContact;0;0;0;0
+FIELD;mainInvoicingAddressStr;12;false;STANDARD;;customerAddressInvoiceStr;0;1;0;com.axelor.apps.sale.db.SaleOrder-mainInvoicingAddressStr
+FIELD;clientPartner.taxNbr;13;false;BIGDECIMAL;;customerTva;0;1;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;clientPartner.registrationCode;14;false;STANDARD;;customerSiret;0;1;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;exTaxTotal;15;false;BIGDECIMAL;;exTaxTotal;2;1;0;com.axelor.apps.sale.db.SaleOrder-exTaxTotal
+FIELD;taxTotal;16;false;BIGDECIMAL;;taxTotal;2;1;0;com.axelor.apps.sale.db.SaleOrder-taxTotal
+FIELD;inTaxTotal;17;false;BIGDECIMAL;;inTaxTotal;2;1;0;com.axelor.apps.sale.db.SaleOrder-inTaxTotal
+FIELD;paymentMode.name;18;false;STANDARD;;paymentMode;0;1;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.name;19;false;STANDARD;;paymentCondition;0;1;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;endOfValidityDate;20;false;LOCALDATE;;validityDate;0;1;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+FIELD;title;21;false;STANDARD;;descriptionGlobal;0;1;0;com.axelor.apps.sale.db.SaleOrder-title
+QUERY;0;22;false;STANDARD;"SELECT c.symbol FROM SaleOrderLine self LEFT JOIN self.product as p LEFT JOIN p.saleCurrency as c WHERE self.saleOrder.id = :id";deviceSymbol;0;0;0;0
+FIELD;product.code;23;false;STANDARD;;productCode;0;0;1;com.axelor.apps.base.db.Product-code
+FIELD;product.customsCodeNomenclature.code;24;false;STANDARD;;customsCode;0;0;1;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productName;25;false;STANDARD;;productName;0;0;0;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;description;26;false;STANDARD;;productDescription;0;0;1;com.axelor.apps.sale.db.SaleOrderLine-description
+FIELD;qty;27;false;BIGDECIMAL;;productQty;3;0;1;com.axelor.apps.sale.db.SaleOrderLine-qty
+FIELD;priceDiscounted;28;false;BIGDECIMAL;;productPrice;2;0;1;com.axelor.apps.sale.db.SaleOrderLine-priceDiscounted
+FIELD;discountAmount;29;false;BIGDECIMAL;;discount;0;0;1;com.axelor.apps.sale.db.SaleOrderLine-discountAmount
+FIELD;product.saleCurrency.symbol;30;false;STANDARD;;deviceSymbol;0;0;1;com.axelor.apps.base.db.Currency-symbol
+QUERY;0;31;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;1;0
+QUERY;0;32;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;2;0
+FIELD;exTaxBase;33;false;BIGDECIMAL;;taxExTaxTotal;2;0;2;com.axelor.apps.sale.db.SaleOrderLineTax-exTaxBase
+FIELD;taxTotal;34;false;BIGDECIMAL;;taxTotal;2;0;2;com.axelor.apps.sale.db.SaleOrderLineTax-taxTotal
+FIELD;product.code;35;false;STANDARD;;productCode;0;0;3;com.axelor.apps.base.db.Product-code
+FIELD;product.customsCodeNomenclature.code;36;false;STANDARD;;customsCode;0;0;3;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productName;37;false;STANDARD;;productName;0;0;3;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;description;38;false;STANDARD;;productDescription;0;0;3;com.axelor.apps.sale.db.SaleOrderLine-description
+FIELD;qty;39;false;BIGDECIMAL;;qty;0;0;3;com.axelor.apps.sale.db.SaleOrderLine-qty
+FIELD;priceDiscounted;40;false;BIGDECIMAL;;price;0;0;3;com.axelor.apps.sale.db.SaleOrderLine-priceDiscounted
+FIELD;discountAmount;41;false;BIGDECIMAL;;discount;0;0;3;com.axelor.apps.sale.db.SaleOrderLine-discountAmount
+FIELD;product.saleCurrency.symbol;42;false;STANDARD;;deviceSymbol;0;0;3;com.axelor.apps.base.db.Currency-symbol
+QUERY;0;43;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.saleOrderLine.id = :id";tvaRate;0;0;3;0
+QUERY;0;44;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.saleOrderLine.id = :id";taxRate;0;0;4;0
+FIELD;exTaxBase;45;false;BIGDECIMAL;;taxExTaxTotal;0;0;4;com.axelor.apps.sale.db.SaleOrderLineTax-exTaxBase
+FIELD;taxTotal;46;false;BIGDECIMAL;;taxTotal;0;0;4;com.axelor.apps.sale.db.SaleOrderLineTax-taxTotal
+FIELD;saleOrderSeq;47;false;STANDARD;;numSaleOrder;0;0;0;com.axelor.apps.sale.db.SaleOrder-saleOrderSeq
+FIELD;deliveryComments;48;false;STANDARD;;noteFromSaleOrder;0;0;0;com.axelor.apps.sale.db.SaleOrder-deliveryComments
+FIELD;salespersonUser.name;49;false;STANDARD;;assignUserName;0;0;0;com.axelor.auth.db.User-name
+FIELD;salespersonUser.partner.emailAddress.address;50;false;STANDARD;;assignUserMail;0;0;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;clientPartner.name;51;false;STANDARD;;nameCustomer;0;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;deliveryAddressStr;52;false;STANDARD;;delivreryCustomer;0;0;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;contactPartner.name;53;false;STANDARD;;contactDeliveryName;0;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;contactPartner.firstName;54;false;STANDARD;;contactDeliveryFirstname;0;0;0;com.axelor.apps.base.db.Partner-firstName
+FIELD;mainInvoicingAddressStr;55;false;STANDARD;;addrCustomer;0;0;0;com.axelor.apps.sale.db.SaleOrder-mainInvoicingAddressStr
+FIELD;clientPartner.registrationCode;56;false;STANDARD;;siretCustomer;0;0;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;paymentMode.name;57;false;STANDARD;;paymentMode;0;0;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.name;58;false;STANDARD;;paymentCondition;0;0;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;inTaxTotal;59;false;BIGDECIMAL;;inTaxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-inTaxTotal
+FIELD;taxTotal;60;false;BIGDECIMAL;;taxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-taxTotal
+FIELD;exTaxTotal;61;false;BIGDECIMAL;;exTaxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-exTaxTotal
+FIELD;clientPartner.taxNbr;62;false;BIGDECIMAL;;tvaCustomer;0;0;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;endOfValidityDate;63;false;LOCALDATE;;validityDate;0;0;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+FIELD;createdOn;64;false;LOCALDATETIME;;dt;0;0;0;com.axelor.apps.sale.db.SaleOrder-createdOn
+FIELD;description;65;false;STANDARD;;descriptionGlobal;0;0;0;com.axelor.apps.sale.db.SaleOrder-description
+QUERY;contactPartner;66;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :contactPartner.id";customerContact;0;0;0;0
+QUERY;0;67;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :salespersonUser.partner.id";assignUserPhone;0;0;0;0
+QUERY;0;68;false;STANDARD;"SELECT c.symbol FROM SaleOrderLine self LEFT JOIN self.product as p LEFT JOIN p.saleCurrency as c WHERE self.saleOrder.id = :id";deviceSymbol;0;0;0;0
+FIELD;product.code;69;false;STANDARD;;productCode;0;0;5;com.axelor.apps.base.db.Product-code
+FIELD;product.customsCodeNomenclature.code;70;false;STANDARD;;customsCode;0;0;5;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productName;71;false;STANDARD;;productName;0;0;5;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;description;72;false;STANDARD;;productDescription;0;0;5;com.axelor.apps.sale.db.SaleOrderLine-description
+FIELD;qty;73;false;BIGDECIMAL;;qty;0;0;5;com.axelor.apps.sale.db.SaleOrderLine-qty
+FIELD;priceDiscounted;74;false;BIGDECIMAL;;price;0;0;5;com.axelor.apps.sale.db.SaleOrderLine-priceDiscounted
+FIELD;discountAmount;75;false;BIGDECIMAL;;discount;0;0;5;com.axelor.apps.sale.db.SaleOrderLine-discountAmount
+FIELD;product.saleCurrency.symbol;76;false;STANDARD;;deviceSymbol;0;0;5;com.axelor.apps.base.db.Currency-symbol
+QUERY;0;77;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.saleOrderLine.id = :id";tvaRate;0;0;5;0
+QUERY;0;78;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.saleOrderLine.id = :id";taxRate;0;0;6;0
+FIELD;exTaxBase;79;false;BIGDECIMAL;;taxExTaxTotal;0;0;6;com.axelor.apps.sale.db.SaleOrderLineTax-exTaxBase
+FIELD;taxTotal;80;false;BIGDECIMAL;;taxTotal;0;0;6;com.axelor.apps.sale.db.SaleOrderLineTax-taxTotal
+FIELD;saleOrderSeq;81;false;STANDARD;;numSaleOrder;0;0;0;com.axelor.apps.sale.db.SaleOrder-saleOrderSeq
+FIELD;deliveryComments;82;false;STANDARD;;noteFromSaleOrder;0;0;0;com.axelor.apps.sale.db.SaleOrder-deliveryComments
+FIELD;salespersonUser.name;83;false;STANDARD;;assignUserName;0;0;0;com.axelor.auth.db.User-name
+FIELD;salespersonUser.partner.emailAddress.address;84;false;STANDARD;;assignUserMail;0;0;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;clientPartner.name;85;false;STANDARD;;nameCustomer;0;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;deliveryAddressStr;86;false;STANDARD;;delivreryCustomer;0;0;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;contactPartner.name;87;false;STANDARD;;contactDeliveryName;0;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;contactPartner.firstName;88;false;STANDARD;;contactDeliveryFirstname;0;0;0;com.axelor.apps.base.db.Partner-firstName
+FIELD;mainInvoicingAddressStr;89;false;STANDARD;;addrCustomer;0;0;0;com.axelor.apps.sale.db.SaleOrder-mainInvoicingAddressStr
+FIELD;clientPartner.registrationCode;90;false;STANDARD;;siretCustomer;0;0;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;paymentMode.name;91;false;STANDARD;;paymentMode;0;0;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.name;92;false;STANDARD;;paymentCondition;0;0;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;inTaxTotal;93;false;BIGDECIMAL;;inTaxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-inTaxTotal
+FIELD;taxTotal;94;false;BIGDECIMAL;;taxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-taxTotal
+FIELD;exTaxTotal;95;false;BIGDECIMAL;;exTaxTotal;0;0;0;com.axelor.apps.sale.db.SaleOrder-exTaxTotal
+FIELD;clientPartner.taxNbr;96;false;BIGDECIMAL;;tvaCustomer;0;0;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;endOfValidityDate;97;false;LOCALDATE;;validityDate;0;0;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+FIELD;createdOn;98;false;LOCALDATETIME;;dt;0;0;0;com.axelor.apps.sale.db.SaleOrder-createdOn
+FIELD;description;99;false;STANDARD;;descriptionGlobal;0;0;0;com.axelor.apps.sale.db.SaleOrder-description
+QUERY;contactPartner;100;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :contactPartner.id";customerContact;0;0;0;0
+QUERY;0;101;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :salespersonUser.partner.id";assignUserPhone;0;0;0;0
+QUERY;0;102;false;STANDARD;"SELECT c.symbol FROM SaleOrderLine self LEFT JOIN self.product as p LEFT JOIN p.saleCurrency as c WHERE self.saleOrder.id = :id";deviceSymbol;0;0;0;0
+QUERY;0;103;false;STANDARD;"SELECT 'devis'";type;0;0;0;0
+FIELD;company.address.addressL4;104;false;STANDARD;;companyAddress;0;1;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;company.address.zip;105;false;STANDARD;;companyZip;0;1;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.city.name;106;false;STANDARD;;companyCity;0;1;0;com.axelor.apps.base.db.City-name
+FIELD;company.partner.fixedPhone;107;false;STANDARD;;companyPhone;0;1;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.partner.fax;108;false;STANDARD;;companyFax;0;0;0;com.axelor.apps.base.db.Partner-fax
+FIELD;company.partner.emailAddress.address;109;false;STANDARD;;companyEmail;0;1;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.webSite;110;false;STANDARD;;companySite;0;1;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.registrationCode;111;false;STANDARD;;companySiret;0;1;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.taxNbr;112;false;STANDARD;;companyTva;0;1;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;deliveryAddressStr;113;false;STANDARD;;customerDeliveryAddressStr;0;1;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;typeSelect;114;false;STANDARD;;typeSelect;0;0;1;com.axelor.apps.sale.db.SaleOrderLine-typeSelect
+FIELD;company.printingSettings.pdfFooter;115;false;STANDARD;;companyFooter;0;1;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;paymentMode.name;116;false;STANDARD;;paymentMode;0;1;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.paymentTime;117;false;STANDARD;;paymentTime;0;1;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;advancePaymentAmountNeeded;118;false;BIGDECIMAL;;advancePaymentAmountNeeded;2;1;0;com.axelor.apps.sale.db.SaleOrder-advancePaymentAmountNeeded
+QUERY;0;119;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;0;1;0;0
+QUERY;0;120;false;BIGDECIMAL;"SELECT self.inTaxTotal - self.advancePaymentAmountNeeded FROM SaleOrder self WHERE self.id = :id";totalNet;2;1;0;0
+FIELD;exTaxTotal;121;false;BIGDECIMAL;;productExTaxTotal;2;0;1;com.axelor.apps.sale.db.SaleOrderLine-exTaxTotal
+QUERY;creationDate;122;false;LOCALDATE;"SELECT self.deadlineDate FROM SaleOrder self WHERE self.id = :id";dateEcheance;0;1;0;com.axelor.apps.sale.db.SaleOrder-creationDate
+FIELD;dueDate;123;false;LOCALDATE;;dateEcheance;2;4;0;com.axelor.apps.account.db.Invoice-dueDate
+QUERY;0;124;false;BIGDECIMAL;"SELECT self.inTaxTotal - coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal, self.inTaxTotal";totalNet;2;4;0;0
+QUERY;0;125;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;2;4;0;0
+QUERY;0;126;false;BIGDECIMAL;"SELECT coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal";advancePaymentAmountNeeded;2;4;0;0
+FIELD;paymentCondition.paymentTime;127;false;STANDARD;;paymentTime;2;4;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;paymentMode.name;128;false;STANDARD;;paymentMode;2;4;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;company.printingSettings.pdfFooter;129;false;STANDARD;;companyFooter;2;4;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;addressStr;130;false;STANDARD;;invoiceAddressStr;2;4;0;com.axelor.apps.account.db.Invoice-addressStr
+FIELD;partner.taxNbr;131;false;STANDARD;;customerTva;2;4;0;com.axelor.apps.base.db.Partner-taxNbr
+QUERY;0;132;false;STANDARD;"SELECT CASE WHEN LENGTH(self.registrationCode) = 17 THEN SUBSTRING(self.registrationCode, 0, 12) ELSE SUBSTRING(self.registrationCode, 0, 10) END FROM Partner self WHERE self.id = :partner.id";customerSiren;2;4;0;0
+FIELD;company.partner.webSite;133;false;STANDARD;;companySite;2;4;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.emailAddress.address;134;false;STANDARD;;companyEmail;2;4;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.fixedPhone;135;false;STANDARD;;companyPhone;2;4;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.address.city.name;136;false;STANDARD;;companyCity;2;4;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.zip;137;false;STANDARD;;companyZip;2;4;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.addressL4;138;false;STANDARD;;companyAddress;2;4;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;dueDate;139;false;LOCALDATE;;validityDate;2;4;0;com.axelor.apps.account.db.Invoice-dueDate
+FIELD;paymentCondition.name;140;false;STANDARD;;paymentCondition;2;4;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;paymentMode.name;141;false;STANDARD;;paymentMode;2;4;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;inTaxTotal;142;false;BIGDECIMAL;;inTaxTotal;2;4;0;com.axelor.apps.account.db.Invoice-inTaxTotal
+FIELD;taxTotal;143;false;BIGDECIMAL;;taxTotal;2;4;0;com.axelor.apps.account.db.Invoice-taxTotal
+FIELD;exTaxTotal;144;false;BIGDECIMAL;;exTaxTotal;2;4;0;com.axelor.apps.account.db.Invoice-exTaxTotal
+FIELD;partner.name;145;false;STANDARD;;customerName;2;4;0;com.axelor.apps.base.db.Partner-name
+FIELD;invoiceDate;146;false;LOCALDATE;;createdOn;2;4;0;com.axelor.apps.account.db.Invoice-invoiceDate
+FIELD;specificNotes;147;false;STANDARD;;specificNotes;2;4;0;com.axelor.apps.account.db.Invoice-specificNotes
+FIELD;invoiceId;148;false;STANDARD;;seq;2;4;0;com.axelor.apps.account.db.Invoice-invoiceId
+FIELD;taxTotal;149;false;BIGDECIMAL;;taxTotal;2;0;7;com.axelor.apps.account.db.InvoiceLineTax-taxTotal
+FIELD;exTaxBase;150;false;BIGDECIMAL;;taxExTaxTotal;2;0;7;com.axelor.apps.account.db.InvoiceLineTax-exTaxBase
+QUERY;0;151;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;7;0
+FIELD;exTaxTotal;152;false;BIGDECIMAL;;productExTaxTotal;2;0;8;com.axelor.apps.account.db.InvoiceLine-exTaxTotal
+FIELD;typeSelect;153;false;STANDARD;;typeSelect;2;0;8;com.axelor.apps.account.db.InvoiceLine-typeSelect
+QUERY;0;154;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;8;0
+FIELD;product.saleCurrency.symbol;155;false;STANDARD;;deviceSymbol;2;0;8;com.axelor.apps.base.db.Currency-symbol
+FIELD;discountAmount;156;false;BIGDECIMAL;;discount;2;0;8;com.axelor.apps.account.db.InvoiceLine-discountAmount
+FIELD;priceDiscounted;157;false;BIGDECIMAL;;productPrice;2;0;8;com.axelor.apps.account.db.InvoiceLine-priceDiscounted
+FIELD;qty;158;false;BIGDECIMAL;;productQty;3;0;8;com.axelor.apps.account.db.InvoiceLine-qty
+FIELD;productName;159;false;STANDARD;;productDescription;2;0;8;com.axelor.apps.account.db.InvoiceLine-productName
+FIELD;product.customsCodeNomenclature.code;160;false;STANDARD;;customsCode;2;0;8;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productCode;161;false;STANDARD;;productCode;2;0;8;com.axelor.apps.account.db.InvoiceLine-productCode
+QUERY;0;162;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;9;0
+FIELD;priceDiscounted;163;false;BIGDECIMAL;;productPrice;2;0;9;com.axelor.apps.sale.db.SaleOrderLine-priceDiscounted
+FIELD;product.code;164;false;STANDARD;;productCode;0;0;9;com.axelor.apps.base.db.Product-code
+FIELD;product.customsCodeNomenclature.code;165;false;STANDARD;;customsCode;0;0;9;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;discountAmount;166;false;BIGDECIMAL;;discount;0;0;9;com.axelor.apps.sale.db.SaleOrderLine-discountAmount
+FIELD;product.saleCurrency.symbol;167;false;STANDARD;;deviceSymbol;0;0;9;com.axelor.apps.base.db.Currency-symbol
+FIELD;productName;168;false;STANDARD;;productDescription;0;0;9;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;typeSelect;169;false;STANDARD;;typeSelect;0;0;9;com.axelor.apps.sale.db.SaleOrderLine-typeSelect
+FIELD;exTaxTotal;170;false;BIGDECIMAL;;productExTaxTotal;2;0;9;com.axelor.apps.sale.db.SaleOrderLine-exTaxTotal
+FIELD;qty;171;false;BIGDECIMAL;;productQty;3;0;9;com.axelor.apps.sale.db.SaleOrderLine-qty
+FIELD;taxTotal;172;false;BIGDECIMAL;;taxTotal;2;0;10;com.axelor.apps.sale.db.SaleOrderLineTax-taxTotal
+FIELD;exTaxBase;173;false;BIGDECIMAL;;taxExTaxTotal;2;0;10;com.axelor.apps.sale.db.SaleOrderLineTax-exTaxBase
+QUERY;0;174;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;10;0
+FIELD;deliveryComments;175;false;STANDARD;;noteFromSaleOrder;0;5;0;com.axelor.apps.sale.db.SaleOrder-deliveryComments
+FIELD;salespersonUser.name;176;false;STANDARD;;assignUserName;0;5;0;com.axelor.auth.db.User-name
+FIELD;salespersonUser.partner.emailAddress.address;177;false;STANDARD;;assignUserMail;0;5;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;paymentMode.name;178;false;STANDARD;;paymentMode;0;5;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.name;179;false;STANDARD;;paymentCondition;0;5;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;endOfValidityDate;180;false;LOCALDATE;;validityDate;0;5;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+QUERY;0;181;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :salespersonUser.partner.id";assignUserPhone;0;5;0;0
+FIELD;title;182;false;STANDARD;;descriptionGlobal;0;5;0;com.axelor.apps.sale.db.SaleOrder-title
+FIELD;clientPartner.registrationCode;183;false;STANDARD;;customerSiret;0;5;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;createdOn;184;false;LOCALDATETIME;;createdOn;0;5;0;com.axelor.apps.sale.db.SaleOrder-createdOn
+FIELD;inTaxTotal;185;false;BIGDECIMAL;;inTaxTotal;2;5;0;com.axelor.apps.sale.db.SaleOrder-inTaxTotal
+FIELD;taxTotal;186;false;BIGDECIMAL;;taxTotal;2;5;0;com.axelor.apps.sale.db.SaleOrder-taxTotal
+FIELD;clientPartner.taxNbr;187;false;BIGDECIMAL;;customerTva;0;5;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;saleOrderSeq;188;false;STANDARD;;seq;0;5;0;com.axelor.apps.sale.db.SaleOrder-saleOrderSeq
+FIELD;company.address.addressL4;189;false;STANDARD;;companyAddress;0;5;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;company.address.zip;190;false;STANDARD;;companyZip;0;5;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.city.name;191;false;STANDARD;;companyCity;0;5;0;com.axelor.apps.base.db.City-name
+FIELD;company.partner.emailAddress.address;192;false;STANDARD;;companyEmail;0;5;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.webSite;193;false;STANDARD;;companySite;0;5;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.registrationCode;194;false;STANDARD;;companySiret;0;5;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.taxNbr;195;false;STANDARD;;companyTva;0;5;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;company.partner.fixedPhone;196;false;STANDARD;;companyPhone;0;5;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;clientPartner.name;197;false;STANDARD;;customerName;0;5;0;com.axelor.apps.base.db.Partner-name
+FIELD;deliveryAddressStr;198;false;STANDARD;;customerDeliveryAddressStr;0;5;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;company.printingSettings.pdfFooter;199;false;STANDARD;;companyFooter;0;5;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;paymentMode.name;200;false;STANDARD;;paymentMode;0;5;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.paymentTime;201;false;STANDARD;;paymentTime;0;5;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+QUERY;0;202;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;0;5;0;0
+QUERY;creationDate;203;false;LOCALDATE;"SELECT self.deadlineDate FROM SaleOrder self WHERE self.id = :id";dateEcheance;0;5;0;com.axelor.apps.sale.db.SaleOrder-creationDate
+QUERY;0;204;false;BIGDECIMAL;"SELECT self.inTaxTotal - self.advancePaymentAmountNeeded FROM SaleOrder self WHERE self.id = :id";totalNet;2;5;0;0
+FIELD;exTaxTotal;205;false;BIGDECIMAL;;exTaxTotal;2;5;0;com.axelor.apps.sale.db.SaleOrder-exTaxTotal
+FIELD;advancePaymentAmountNeeded;206;false;BIGDECIMAL;;advancePaymentAmountNeeded;2;5;0;com.axelor.apps.sale.db.SaleOrder-advancePaymentAmountNeeded
+FIELD;mainInvoicingAddressStr;207;false;STANDARD;;customerAddressInvoiceStr;0;5;0;com.axelor.apps.sale.db.SaleOrder-mainInvoicingAddressStr
+FIELD;taxTotal;208;false;BIGDECIMAL;;taxTotal;2;0;11;com.axelor.apps.account.db.InvoiceLineTax-taxTotal
+FIELD;exTaxBase;209;false;BIGDECIMAL;;taxExTaxBase;2;0;11;com.axelor.apps.account.db.InvoiceLineTax-exTaxBase
+QUERY;0;210;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;11;0
+FIELD;exTaxTotal;211;false;BIGDECIMAL;;productExTaxTotal;2;0;12;com.axelor.apps.account.db.InvoiceLine-exTaxTotal
+FIELD;typeSelect;212;false;STANDARD;;typeSelect;2;0;12;com.axelor.apps.account.db.InvoiceLine-typeSelect
+QUERY;0;213;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;12;0
+FIELD;product.saleCurrency.symbol;214;false;STANDARD;;deviceSymbol;2;0;12;com.axelor.apps.base.db.Currency-symbol
+FIELD;discountAmount;215;false;BIGDECIMAL;;discount;2;0;12;com.axelor.apps.account.db.InvoiceLine-discountAmount
+FIELD;priceDiscounted;216;false;BIGDECIMAL;;productPrice;2;0;12;com.axelor.apps.account.db.InvoiceLine-priceDiscounted
+FIELD;qty;217;false;BIGDECIMAL;;productQty;2;0;12;com.axelor.apps.account.db.InvoiceLine-qty
+FIELD;productName;218;false;STANDARD;;productDescription;2;0;12;com.axelor.apps.account.db.InvoiceLine-productName
+FIELD;product.customsCodeNomenclature.code;219;false;STANDARD;;customsCode;2;0;12;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productCode;220;false;STANDARD;;productCode;2;0;12;com.axelor.apps.account.db.InvoiceLine-productCode
+FIELD;paymentCondition.paymentTime;221;false;STANDARD;;paymentTime;2;0;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;paymentMode.name;222;false;STANDARD;;paymentMode;2;0;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;company.printingSettings.pdfFooter;223;false;STANDARD;;companyFooter;2;0;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;deliveryAddressStr;224;false;STANDARD;;customerDeliveryAddressStr;2;0;0;com.axelor.apps.account.db.Invoice-deliveryAddressStr
+FIELD;partner.taxNbr;225;false;STANDARD;;customerTva;2;0;0;com.axelor.apps.base.db.Partner-taxNbr
+QUERY;0;226;false;STANDARD;"SELECT coalesce(CASE WHEN LENGTH(self.registrationCode) = 17 THEN SUBSTRING(self.registrationCode, 0, 12) ELSE SUBSTRING(self.registrationCode, 0, 10) END, ) FROM Partner self WHERE self.id = :partner.id";customerSiren;2;0;0;0
+FIELD;company.partner.webSite;227;false;STANDARD;;companySite;2;0;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.emailAddress.address;228;false;STANDARD;;companyEmail;2;0;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.fixedPhone;229;false;STANDARD;;companyPhone;2;0;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.address.city.name;230;false;STANDARD;;companyCity;2;0;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.zip;231;false;STANDARD;;companyZip;2;0;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.addressL4;232;false;STANDARD;;companyAddress;2;0;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;dueDate;233;false;LOCALDATE;;validityDate;2;0;0;com.axelor.apps.account.db.Invoice-dueDate
+FIELD;paymentCondition.name;234;false;STANDARD;;paymentCondition;2;0;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;saleOrder.deadlineDate;235;false;LOCALDATE;;dateEcheance;2;0;0;com.axelor.apps.sale.db.SaleOrder-deadlineDate
+QUERY;0;236;false;BIGDECIMAL;"SELECT self.inTaxTotal, coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal, self.inTaxTotal";totalNet;2;0;0;0
+QUERY;0;237;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;2;0;0;0
+QUERY;0;238;false;BIGDECIMAL;"SELECT coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = 2 GROUP BY advancePayment.inTaxTotal";advancePaymentAmountNeeded;2;0;0;0
+FIELD;paymentMode.name;239;false;STANDARD;;paymentMode;2;0;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;inTaxTotal;240;false;BIGDECIMAL;;inTaxTotal;2;0;0;com.axelor.apps.account.db.Invoice-inTaxTotal
+FIELD;taxTotal;241;false;BIGDECIMAL;;taxTotal;2;0;0;com.axelor.apps.account.db.Invoice-taxTotal
+FIELD;exTaxTotal;242;false;BIGDECIMAL;;exTaxTotal;2;0;0;com.axelor.apps.account.db.Invoice-exTaxTotal
+FIELD;partner.name;243;false;STANDARD;;customerName;2;0;0;com.axelor.apps.base.db.Partner-name
+FIELD;createdOn;244;false;LOCALDATETIME;;createdOn;2;0;0;com.axelor.apps.account.db.Invoice-createdOn
+FIELD;specificNotes;245;false;STANDARD;;specificNotes;2;0;0;com.axelor.apps.account.db.Invoice-specificNotes
+FIELD;internalReference;246;false;STANDARD;;seq;2;0;0;com.axelor.apps.account.db.Invoice-internalReference
+FIELD;partner.registrationCode;247;false;STANDARD;;customerRegistrationCode;2;4;0;com.axelor.apps.base.db.Partner-registrationCode
+QUERY;0;248;false;STANDARD;"SELECT 'Facture proforma' FROM Invoice";typeDoc;2;4;0;0
+FIELD;taxTotal;249;false;BIGDECIMAL;;taxTotal;2;0;13;com.axelor.apps.account.db.InvoiceLineTax-taxTotal
+QUERY;0;250;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;13;0
+FIELD;exTaxBase;251;false;BIGDECIMAL;;taxExTaxTotal;2;0;13;com.axelor.apps.account.db.InvoiceLineTax-exTaxBase
+FIELD;exTaxTotal;252;false;BIGDECIMAL;;productExTaxTotal;2;0;14;com.axelor.apps.account.db.InvoiceLine-exTaxTotal
+FIELD;typeSelect;253;false;STANDARD;;typeSelect;2;0;14;com.axelor.apps.account.db.InvoiceLine-typeSelect
+QUERY;0;254;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;14;0
+FIELD;product.saleCurrency.symbol;255;false;STANDARD;;deviceSymbol;2;0;14;com.axelor.apps.base.db.Currency-symbol
+FIELD;discountAmount;256;false;BIGDECIMAL;;discount;2;0;14;com.axelor.apps.account.db.InvoiceLine-discountAmount
+FIELD;priceDiscounted;257;false;BIGDECIMAL;;productPrice;2;0;14;com.axelor.apps.account.db.InvoiceLine-priceDiscounted
+FIELD;qty;258;false;BIGDECIMAL;;productQty;3;0;14;com.axelor.apps.account.db.InvoiceLine-qty
+FIELD;description;259;false;STANDARD;;productDescription;2;0;14;com.axelor.apps.account.db.InvoiceLine-description
+FIELD;product.customsCodeNomenclature.code;260;false;STANDARD;;customsCode;2;0;14;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productCode;261;false;STANDARD;;productCode;2;0;14;com.axelor.apps.account.db.InvoiceLine-productCode
+FIELD;paymentCondition.paymentTime;262;false;STANDARD;;paymentTime;2;7;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;paymentMode.name;263;false;STANDARD;;paymentMode;2;7;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;company.printingSettings.pdfFooter;264;false;STANDARD;;companyFooter;2;7;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;addressStr;265;false;STANDARD;;customerDeliveryAddressStr;2;7;0;com.axelor.apps.account.db.Invoice-addressStr
+FIELD;partner.taxNbr;266;false;STANDARD;;customerTva;2;7;0;com.axelor.apps.base.db.Partner-taxNbr
+QUERY;0;267;false;STANDARD;"SELECT CASE WHEN LENGTH(self.registrationCode) = 17 THEN SUBSTRING(self.registrationCode, 0, 12) ELSE SUBSTRING(self.registrationCode, 0, 10) END FROM Partner self WHERE self.id = :partner.id";customerSiren;2;7;0;0
+FIELD;company.partner.webSite;268;false;STANDARD;;companySite;2;7;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.emailAddress.address;269;false;STANDARD;;companyEmail;2;7;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.fixedPhone;270;false;STANDARD;;companyPhone;2;7;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.address.city.name;271;false;STANDARD;;companyCity;2;7;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.zip;272;false;STANDARD;;companyZip;2;7;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.addressL4;273;false;STANDARD;;companyAddress;2;7;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;dueDate;274;false;LOCALDATE;;validityDate;2;7;0;com.axelor.apps.account.db.Invoice-dueDate
+FIELD;paymentCondition.name;275;false;STANDARD;;paymentCondition;2;7;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;dueDate;276;false;LOCALDATE;;dateEcheance;2;7;0;com.axelor.apps.account.db.Invoice-dueDate
+QUERY;0;277;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;2;7;0;0
+QUERY;0;278;false;BIGDECIMAL;"SELECT coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal";advancePaymentAmountNeeded;2;7;0;0
+FIELD;paymentMode.name;279;false;STANDARD;;paymentMode;2;7;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;inTaxTotal;280;false;BIGDECIMAL;;inTaxTotal;2;7;0;com.axelor.apps.account.db.Invoice-inTaxTotal
+FIELD;taxTotal;281;false;BIGDECIMAL;;taxTotal;2;7;0;com.axelor.apps.account.db.Invoice-taxTotal
+FIELD;exTaxTotal;282;false;BIGDECIMAL;;exTaxTotal;2;7;0;com.axelor.apps.account.db.Invoice-exTaxTotal
+FIELD;partner.name;283;false;STANDARD;;customerName;2;7;0;com.axelor.apps.base.db.Partner-name
+FIELD;invoiceDate;284;true;LOCALDATE;;createdOn;2;7;0;com.axelor.apps.account.db.Invoice-invoiceDate
+FIELD;specificNotes;285;false;STANDARD;;specificNotes;2;7;0;com.axelor.apps.account.db.Invoice-specificNotes
+FIELD;invoiceId;286;false;STANDARD;;seq;2;7;0;com.axelor.apps.account.db.Invoice-invoiceId
+QUERY;0;287;false;BIGDECIMAL;"SELECT self.inTaxTotal - coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal, self.inTaxTotal";totalNet;2;7;0;0
+FIELD;partner.registrationCode;288;false;STANDARD;;customerRegistrationCode;2;7;0;com.axelor.apps.base.db.Partner-registrationCode
+QUERY;0;289;false;STANDARD;"SELECT 'Facture' FROM Invoice";typeDoc;2;7;0;0
+FIELD;clientPartner.registrationCode;290;false;STANDARD;;customerRegistrationCode;2;5;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;clientPartner.taxNbr;291;false;STANDARD;;customerTva;2;5;0;com.axelor.apps.base.db.Partner-taxNbr
+QUERY;0;292;false;STANDARD;"SELECT CASE WHEN LENGTH(self.registrationCode) = 17 THEN SUBSTRING(self.registrationCode, 0, 12) ELSE SUBSTRING(self.registrationCode, 0, 10) END FROM Partner self WHERE self.id = :clientPartner.id";customerSiren;2;5;0;0
+FIELD;title;293;false;STANDARD;;descriptionGlobal;2;7;0;com.axelor.apps.account.db.Invoice-title
+FIELD;product.code;294;false;STANDARD;;productCode;2;0;15;com.axelor.apps.base.db.Product-code
+FIELD;product.description;295;false;STANDARD;;productDescription;2;0;15;com.axelor.apps.base.db.Product-description
+FIELD;qty;296;false;BIGDECIMAL;;productQty;2;0;15;com.axelor.apps.stock.db.StockMoveLine-qty
+FIELD;realQty;297;false;BIGDECIMAL;;productRealQty;2;0;15;com.axelor.apps.stock.db.StockMoveLine-realQty
+QUERY;0;298;false;BIGDECIMAL;"SELECT self.qty - self.realQty FROM StockMoveLine self where self.id = :id";productRemainder;2;0;15;0
+FIELD;createdOn;299;false;LOCALDATETIME;;createdOn;2;8;0;com.axelor.apps.stock.db.StockMove-createdOn
+FIELD;stockMoveSeq;300;false;STANDARD;;seq;2;8;0;com.axelor.apps.stock.db.StockMove-stockMoveSeq
+FIELD;partner.name;301;false;STANDARD;;customerName;2;8;0;com.axelor.apps.base.db.Partner-name
+FIELD;toAddressStr;302;false;STANDARD;;customerDeliveryAddressStr;2;8;0;com.axelor.apps.stock.db.StockMove-toAddressStr
+FIELD;company.address.addressL4;303;false;STANDARD;;companyAddress;2;8;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;company.address.city.name;304;false;STANDARD;;companyCity;2;8;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.zip;305;false;STANDARD;;companyZip;2;8;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.partner.taxNbr;306;false;STANDARD;;companyTva;2;8;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;company.partner.registrationCode;307;false;STANDARD;;companySiret;2;8;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.webSite;308;false;STANDARD;;companySite;2;8;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.emailAddress.address;309;false;STANDARD;;companyEmail;2;8;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.fixedPhone;310;false;STANDARD;;companyPhone;2;8;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.printingSettings.pdfFooter;311;false;STANDARD;;companyFooter;2;8;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+QUERY;0;312;false;STANDARD;"SELECT self.qty - self.realQty FROM StockMoveLine self where self.id = :id";productRemainder;2;0;16;0
+FIELD;realQty;313;false;BIGDECIMAL;;productRealQty;2;0;16;com.axelor.apps.stock.db.StockMoveLine-realQty
+FIELD;qty;314;false;BIGDECIMAL;;productQty;2;0;16;com.axelor.apps.stock.db.StockMoveLine-qty
+FIELD;product.description;315;false;STANDARD;;productDescription;2;0;16;com.axelor.apps.base.db.Product-description
+FIELD;product.code;316;false;STANDARD;;productCode;2;0;16;com.axelor.apps.base.db.Product-code
+FIELD;company.printingSettings.pdfFooter;317;false;STANDARD;;companyFooter;2;9;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;company.partner.fixedPhone;318;false;STANDARD;;companyPhone;2;9;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.partner.emailAddress.address;319;false;STANDARD;;companyEmail;2;9;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.webSite;320;false;STANDARD;;companySite;2;9;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.registrationCode;321;false;STANDARD;;companySiret;2;9;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.taxNbr;322;false;STANDARD;;companyTva;2;9;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;company.address.zip;323;false;STANDARD;;companyZip;2;9;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.city.name;324;false;STANDARD;;companyCity;2;9;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.addressL4;325;false;STANDARD;;companyAddress;2;9;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;fromAddressStr;326;false;STANDARD;;customerDeliveryAddressStr;2;9;0;com.axelor.apps.stock.db.StockMove-fromAddressStr
+FIELD;partner.name;327;false;STANDARD;;customerName;2;9;0;com.axelor.apps.base.db.Partner-name
+FIELD;stockMoveSeq;328;false;STANDARD;;seq;2;9;0;com.axelor.apps.stock.db.StockMove-stockMoveSeq
+FIELD;createdOn;329;false;LOCALDATETIME;;createdOn;2;9;0;com.axelor.apps.stock.db.StockMove-createdOn
+FIELD;purchaseOrderSeq;330;false;STANDARD;;seq;2;10;0;com.axelor.apps.purchase.db.PurchaseOrder-purchaseOrderSeq
+FIELD;createdOn;331;false;LOCALDATETIME;;createdOn;2;10;0;com.axelor.apps.purchase.db.PurchaseOrder-createdOn
+FIELD;supplierPartner.name;332;false;STANDARD;;supplierName;2;10;0;com.axelor.apps.base.db.Partner-name
+QUERY;0;333;false;STANDARD;"SELECT CONCAT(address.addressL4, '\n', address.zip, ' ', city.name, '\n', country.name) FROM Partner self LEFT OUTER JOIN self.partnerAddressList partnerAddr ON partnerAddr.isDefaultAddr = true LEFT OUTER JOIN partnerAddr.address address LEFT OUTER JOIN address.city city LEFT OUTER JOIN address.addressL7Country country WHERE self.id = :supplierPartner.id";supplierAddressStr;2;10;0;0
+FIELD;company.address.addressL4;334;false;STANDARD;;companyAddress;2;10;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;company.address.zip;335;false;STANDARD;;companyZip;2;10;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.city.name;336;false;STANDARD;;companyCity;2;10;0;com.axelor.apps.base.db.City-name
+FIELD;company.partner.fixedPhone;337;false;STANDARD;;companyPhone;2;10;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.partner.emailAddress.address;338;false;STANDARD;;companyEmail;2;10;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.webSite;339;false;STANDARD;;companySite;2;10;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.registrationCode;340;false;STANDARD;;companySiret;2;10;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.taxNbr;341;false;STANDARD;;companyTva;2;10;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;taxTotal;342;false;BIGDECIMAL;;taxTotal;2;0;17;com.axelor.apps.purchase.db.PurchaseOrderLineTax-taxTotal
+FIELD;exTaxBase;343;false;BIGDECIMAL;;taxExTaxBase;2;0;17;com.axelor.apps.purchase.db.PurchaseOrderLineTax-exTaxBase
+QUERY;0;344;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;2;0;17;0
+FIELD;deadlineDate;345;false;LOCALDATE;;dateEcheance;2;10;0;0
+QUERY;0;346;false;BIGDECIMAL;"SELECT coalesce(self.inTaxTotal,0) FROM PurchaseOrder self WHERE self.id = :id";totalNet;2;10;0;0
+QUERY;0;347;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;2;10;0;0
+FIELD;paymentCondition.paymentTime;348;false;STANDARD;;paymentTime;2;10;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;paymentMode.name;349;false;STANDARD;;paymentMode;2;10;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;company.printingSettings.pdfFooter;350;false;STANDARD;;companyFooter;2;10;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;inTaxTotal;351;false;BIGDECIMAL;;inTaxTotal;2;10;0;com.axelor.apps.purchase.db.PurchaseOrder-inTaxTotal
+FIELD;taxTotal;352;false;BIGDECIMAL;;taxTotal;2;10;0;com.axelor.apps.purchase.db.PurchaseOrder-taxTotal
+FIELD;exTaxTotal;353;false;BIGDECIMAL;;exTaxTotal;2;10;0;com.axelor.apps.purchase.db.PurchaseOrder-exTaxTotal
+FIELD;exTaxTotal;354;false;BIGDECIMAL;;productExTaxTotal;2;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-exTaxTotal
+QUERY;0;355;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;18;0
+FIELD;product.saleCurrency.symbol;356;false;STANDARD;"productTvaRate";deviceSymbol;2;0;18;com.axelor.apps.base.db.Currency-symbol
+FIELD;discountAmount;357;false;BIGDECIMAL;;discount;2;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-discountAmount
+FIELD;priceDiscounted;358;false;BIGDECIMAL;;productPrice;2;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-priceDiscounted
+FIELD;qty;359;false;BIGDECIMAL;;productQty;3;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-qty
+FIELD;productName;360;false;STANDARD;;productDescription;2;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-productName
+FIELD;product.customsCodeNomenclature.code;361;false;STANDARD;;customsCode;2;0;18;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productCode;362;false;STANDARD;;productCode;2;0;18;com.axelor.apps.purchase.db.PurchaseOrderLine-productCode
+FIELD;taxTotal;588;false;BIGDECIMAL;;taxTotal;2;0;30;com.axelor.apps.sale.db.SaleOrderLineTax-taxTotal
+FIELD;exTaxBase;590;false;BIGDECIMAL;;taxExTaxTotal;2;0;30;com.axelor.apps.sale.db.SaleOrderLineTax-exTaxBase
+QUERY;0;592;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;30;0
+FIELD;typeSelect;594;false;STANDARD;;typeSelect;0;0;32;com.axelor.apps.sale.db.SaleOrderLine-typeSelect
+FIELD;product.code;596;false;STANDARD;;productCode;0;0;32;com.axelor.apps.base.db.Product-code
+FIELD;product.customsCodeNomenclature.code;598;false;STANDARD;;customsCode;0;0;32;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;discountAmount;600;false;BIGDECIMAL;;discount;0;0;32;com.axelor.apps.sale.db.SaleOrderLine-discountAmount
+FIELD;product.saleCurrency.symbol;602;false;STANDARD;;deviceSymbol;0;0;32;com.axelor.apps.base.db.Currency-symbol
+QUERY;0;604;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;32;0
+FIELD;priceDiscounted;606;false;BIGDECIMAL;;productPrice;2;0;32;com.axelor.apps.sale.db.SaleOrderLine-priceDiscounted
+FIELD;productName;608;false;STANDARD;;productName;0;0;32;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;exTaxTotal;610;false;BIGDECIMAL;;productExTaxTotal;2;0;32;com.axelor.apps.sale.db.SaleOrderLine-exTaxTotal
+FIELD;qty;612;false;BIGDECIMAL;;productQty;3;0;32;com.axelor.apps.sale.db.SaleOrderLine-qty
+FIELD;deliveryComments;614;false;STANDARD;;noteFromSaleOrder;0;6;0;com.axelor.apps.sale.db.SaleOrder-deliveryComments
+FIELD;salespersonUser.name;616;false;STANDARD;;assignUserName;0;6;0;com.axelor.auth.db.User-name
+QUERY;0;618;false;BIGDECIMAL;"SELECT self.inTaxTotal - self.advancePaymentAmountNeeded FROM SaleOrder self WHERE self.id = :id";totalNet;2;6;0;0
+FIELD;exTaxTotal;620;false;BIGDECIMAL;;exTaxTotal;2;6;0;com.axelor.apps.sale.db.SaleOrder-exTaxTotal
+FIELD;advancePaymentAmountNeeded;622;false;BIGDECIMAL;;advancePaymentAmountNeeded;2;6;0;com.axelor.apps.sale.db.SaleOrder-advancePaymentAmountNeeded
+FIELD;salespersonUser.partner.emailAddress.address;624;false;STANDARD;;assignUserMail;0;6;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.address.city.name;626;false;STANDARD;;companyCity;0;6;0;com.axelor.apps.base.db.City-name
+FIELD;company.partner.emailAddress.address;628;false;STANDARD;;companyEmail;0;6;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.webSite;630;false;STANDARD;;companySite;0;6;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.registrationCode;632;false;STANDARD;;companySiret;0;6;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;company.partner.taxNbr;634;false;STANDARD;;companyTva;0;6;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;company.partner.fixedPhone;636;false;STANDARD;;companyPhone;0;6;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;clientPartner.name;638;false;STANDARD;;customerName;0;6;0;com.axelor.apps.base.db.Partner-name
+FIELD;deliveryAddressStr;640;false;STANDARD;;customerDeliveryAddressStr;0;6;0;com.axelor.apps.sale.db.SaleOrder-deliveryAddressStr
+FIELD;paymentMode.name;642;false;STANDARD;;paymentMode;0;6;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.paymentTime;644;false;STANDARD;;paymentTime;0;6;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+QUERY;0;646;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;0;6;0;0
+QUERY;creationDate;648;false;LOCALDATE;"SELECT self.deadlineDate FROM SaleOrder self WHERE self.id = :id";dateEcheance;0;6;0;com.axelor.apps.sale.db.SaleOrder-creationDate
+FIELD;company.printingSettings.pdfFooter;650;false;STANDARD;;companyFooter;0;6;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;paymentMode.name;652;false;STANDARD;;paymentMode;0;6;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;paymentCondition.name;654;false;STANDARD;;paymentCondition;0;6;0;com.axelor.apps.account.db.PaymentCondition-name
+FIELD;endOfValidityDate;656;false;LOCALDATE;;validityDate;0;6;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+FIELD;clientPartner.registrationCode;658;false;STANDARD;;customerSiret;0;6;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;inTaxTotal;660;false;BIGDECIMAL;;inTaxTotal;2;6;0;com.axelor.apps.sale.db.SaleOrder-inTaxTotal
+FIELD;taxTotal;662;false;BIGDECIMAL;;taxTotal;2;6;0;com.axelor.apps.sale.db.SaleOrder-taxTotal
+FIELD;title;664;false;STANDARD;;descriptionGlobal;0;6;0;com.axelor.apps.sale.db.SaleOrder-title
+FIELD;createdOn;666;false;LOCALDATETIME;;dt;0;6;0;com.axelor.apps.sale.db.SaleOrder-createdOn
+FIELD;clientPartner.taxNbr;668;false;BIGDECIMAL;;customerTva;0;6;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;saleOrderSeq;670;false;STANDARD;;seq;0;6;0;com.axelor.apps.sale.db.SaleOrder-saleOrderSeq
+FIELD;company.address.addressL4;672;false;STANDARD;;companyAddress;0;6;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;company.address.zip;674;false;STANDARD;;companyZip;0;6;0;com.axelor.apps.base.db.Address-zip
+FIELD;mainInvoicingAddressStr;676;false;STANDARD;;customerAddressInvoiceStr;0;6;0;com.axelor.apps.sale.db.SaleOrder-mainInvoicingAddressStr
+QUERY;0;678;false;STANDARD;"SELECT CASE WHEN (self.fixedPhone IS NOT NULL) THEN self.fixedPhone ELSE self.mobilePhone END FROM Partner self WHERE self.id = :salespersonUser.partner.id";assignUserPhone;0;6;0;0
+FIELD;productName;818;false;STANDARD;;productName;2;0;1;com.axelor.apps.sale.db.SaleOrderLine-productName
+FIELD;createdOn;820;true;LOCALDATETIME;;createdOn;2;6;0;com.axelor.apps.sale.db.SaleOrder-createdOn
+FIELD;description;824;false;STANDARD;;productDescription;2;0;32;com.axelor.apps.sale.db.SaleOrderLine-description
+QUERY;0;826;false;STANDARD;"SELECT CASE WHEN self.isTitleLine = true THEN 1 ELSE 0 END FROM PurchaseOrderLine self WHERE self.id = :id";typeSelect;2;0;18;0
+FIELD;description;828;false;STANDARD;;invoiceDescription;2;0;14;com.axelor.apps.account.db.InvoiceLine-description
+FIELD;invoiceDate;830;false;LOCALDATE;;dt;2;7;0;com.axelor.apps.account.db.Invoice-invoiceDate
+FIELD;addressStr;832;false;STANDARD;;customerDeliveryAddressStr;2;4;0;com.axelor.apps.account.db.Invoice-addressStr
+FIELD;title;834;false;STANDARD;;descriptionGlobal;2;4;0;com.axelor.apps.account.db.Invoice-title
+FIELD;productName;836;false;STANDARD;;productName;2;0;14;com.axelor.apps.account.db.InvoiceLine-productName
+FIELD;description;838;false;STANDARD;;description;2;6;0;com.axelor.apps.sale.db.SaleOrder-description
+FIELD;product.serialNumber;840;false;STANDARD;;product.serialNumber;2;0;15;com.axelor.apps.base.db.Product-serialNumber
+FIELD;productName;842;false;STANDARD;;productName;2;0;15;com.axelor.apps.stock.db.StockMoveLine-productName
+FIELD;trackingNumber.trackingNumberSeq;844;false;STANDARD;;trackingNumber;2;0;15;com.axelor.apps.stock.db.TrackingNumber-trackingNumberSeq
+FIELD;exTaxTotal;846;false;BIGDECIMAL;;productExTaxTotal;2;0;34;com.axelor.apps.account.db.InvoiceLine-exTaxTotal
+FIELD;typeSelect;848;false;STANDARD;;typeSelect;2;0;34;com.axelor.apps.account.db.InvoiceLine-typeSelect
+QUERY;0;850;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";productTvaRate;1;0;34;0
+FIELD;product.saleCurrency.symbol;852;false;STANDARD;;deviceSymbol;2;0;34;com.axelor.apps.base.db.Currency-symbol
+FIELD;discountAmount;854;false;BIGDECIMAL;;discount;2;0;34;com.axelor.apps.account.db.InvoiceLine-discountAmount
+FIELD;priceDiscounted;856;false;BIGDECIMAL;;productPrice;2;0;34;com.axelor.apps.account.db.InvoiceLine-priceDiscounted
+FIELD;qty;858;false;BIGDECIMAL;;productQty;3;0;34;com.axelor.apps.account.db.InvoiceLine-qty
+FIELD;product.customsCodeNomenclature.code;860;false;STANDARD;;customsCode;2;0;34;com.axelor.apps.stock.db.CustomsCodeNomenclature-code
+FIELD;productCode;862;false;STANDARD;;productCode;2;0;34;com.axelor.apps.account.db.InvoiceLine-productCode
+FIELD;description;864;false;STANDARD;;productDescription;2;0;34;com.axelor.apps.account.db.InvoiceLine-description
+FIELD;description;866;false;STANDARD;;invoiceDescription;2;0;34;com.axelor.apps.account.db.InvoiceLine-description
+FIELD;productName;868;false;STANDARD;;productName;2;0;34;com.axelor.apps.account.db.InvoiceLine-productName
+FIELD;exTaxBase;870;false;BIGDECIMAL;;taxExTaxTotal;2;0;33;com.axelor.apps.account.db.InvoiceLineTax-exTaxBase
+QUERY;0;872;false;BIGDECIMAL;"SELECT self.value * 100 FROM TaxLine self WHERE self.id = :taxLine.id";taxRate;1;0;33;0
+FIELD;taxTotal;874;false;BIGDECIMAL;;taxTotal;2;0;33;com.axelor.apps.account.db.InvoiceLineTax-taxTotal
+FIELD;dueDate;876;false;LOCALDATE;;validityDate;2;11;0;com.axelor.apps.account.db.Invoice-dueDate
+FIELD;paymentCondition.name;878;false;STANDARD;;paymentCondition;2;11;0;com.axelor.apps.account.db.PaymentCondition-name
+QUERY;0;880;false;STANDARD;"SELECT self.title FROM MetaSelectItem self WHERE self.value = CAST(:paymentCondition.periodTypeSelect as string) AND self.select.name = 'account.payment.condition.period.type.select'";paymentPeriod;2;11;0;0
+FIELD;paymentMode.name;882;false;STANDARD;;paymentMode;2;11;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;inTaxTotal;884;false;BIGDECIMAL;;inTaxTotal;2;11;0;com.axelor.apps.account.db.Invoice-inTaxTotal
+FIELD;taxTotal;886;false;BIGDECIMAL;;taxTotal;2;11;0;com.axelor.apps.account.db.Invoice-taxTotal
+FIELD;exTaxTotal;888;false;BIGDECIMAL;;exTaxTotal;2;11;0;com.axelor.apps.account.db.Invoice-exTaxTotal
+FIELD;partner.name;890;false;STANDARD;;customerName;2;11;0;com.axelor.apps.base.db.Partner-name
+FIELD;specificNotes;892;false;STANDARD;;specificNotes;2;11;0;com.axelor.apps.account.db.Invoice-specificNotes
+QUERY;0;894;false;BIGDECIMAL;"SELECT self.inTaxTotal - coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal, self.inTaxTotal";totalNet;2;11;0;0
+FIELD;partner.registrationCode;896;false;STANDARD;;customerRegistrationCode;2;11;0;com.axelor.apps.base.db.Partner-registrationCode
+FIELD;invoiceId;898;false;STANDARD;;seq;2;11;0;com.axelor.apps.account.db.Invoice-invoiceId
+FIELD;invoiceDate;900;true;LOCALDATE;;createdOn;2;11;0;com.axelor.apps.account.db.Invoice-invoiceDate
+FIELD;dueDate;902;false;LOCALDATE;;dateEcheance;2;11;0;com.axelor.apps.account.db.Invoice-dueDate
+QUERY;0;904;false;STANDARD;"SELECT 'Avoir' FROM Invoice";typeDoc;2;11;0;0
+FIELD;title;906;false;STANDARD;;descriptionGlobal;2;11;0;com.axelor.apps.account.db.Invoice-title
+QUERY;0;908;false;STANDARD;"SELECT CASE WHEN LENGTH(self.registrationCode) = 17 THEN SUBSTRING(self.registrationCode, 0, 12) ELSE SUBSTRING(self.registrationCode, 0, 10) END FROM Partner self WHERE self.id = :partner.id";customerSiren;2;11;0;0
+FIELD;paymentCondition.paymentTime;910;false;STANDARD;;paymentTime;2;11;0;com.axelor.apps.account.db.PaymentCondition-paymentTime
+FIELD;paymentMode.name;912;false;STANDARD;;paymentMode;2;11;0;com.axelor.apps.account.db.PaymentMode-name
+FIELD;company.printingSettings.pdfFooter;914;false;STANDARD;;companyFooter;2;11;0;com.axelor.apps.base.db.PrintingSettings-pdfFooter
+FIELD;partner.taxNbr;916;false;STANDARD;;customerTva;2;11;0;com.axelor.apps.base.db.Partner-taxNbr
+FIELD;company.partner.webSite;918;false;STANDARD;;companySite;2;11;0;com.axelor.apps.base.db.Partner-webSite
+FIELD;company.partner.emailAddress.address;920;false;STANDARD;;companyEmail;2;11;0;com.axelor.apps.message.db.EmailAddress-address
+FIELD;company.partner.fixedPhone;922;false;STANDARD;;companyPhone;2;11;0;com.axelor.apps.base.db.Partner-fixedPhone
+FIELD;company.address.city.name;924;false;STANDARD;;companyCity;2;11;0;com.axelor.apps.base.db.City-name
+FIELD;company.address.zip;926;false;STANDARD;;companyZip;2;11;0;com.axelor.apps.base.db.Address-zip
+FIELD;company.address.addressL4;928;false;STANDARD;;companyAddress;2;11;0;com.axelor.apps.base.db.Address-addressL4
+FIELD;addressStr;930;false;STANDARD;;customerDeliveryAddressStr;2;11;0;com.axelor.apps.account.db.Invoice-addressStr
+QUERY;0;932;false;BIGDECIMAL;"SELECT coalesce(SUM(advancePayment.inTaxTotal),0) FROM Invoice self LEFT JOIN self.advancePaymentInvoiceSet advancePayment WHERE self.id = :id GROUP BY advancePayment.inTaxTotal";advancePaymentAmountNeeded;2;11;0;0
+FIELD;invoiceDate;934;false;LOCALDATE;;dt;2;11;0;com.axelor.apps.account.db.Invoice-invoiceDate
+FIELD;subscriptionFromDate;936;false;LOCALDATE;;subscriptionFromDate;2;4;0;com.axelor.apps.account.db.Invoice-subscriptionFromDate
+FIELD;subscriptionToDate;938;false;LOCALDATE;;subscriptionToDate;2;4;0;com.axelor.apps.account.db.Invoice-subscriptionToDate
+FIELD;operationSubTypeSelect;940;false;STANDARD;;operationSubTypeSelect;2;7;0;com.axelor.apps.account.db.Invoice-operationSubTypeSelect
+FIELD;subscriptionFromDate;942;false;LOCALDATE;;subscriptionFromDate;2;7;0;com.axelor.apps.account.db.Invoice-subscriptionFromDate
+FIELD;subscriptionToDate;944;false;LOCALDATE;;subscriptionToDate;2;7;0;com.axelor.apps.account.db.Invoice-subscriptionToDate
+FIELD;operationSubTypeSelect;946;false;STANDARD;;operationSubTypeSelect;2;4;0;com.axelor.apps.account.db.Invoice-operationSubTypeSelect
+FIELD;endOfValidityDate;948;false;LOCALDATE;;endOfValidityDate;2;1;0;com.axelor.apps.sale.db.SaleOrder-endOfValidityDate
+FIELD;deliveryNumberSeq;3332;false;STANDARD;;deliveryNumberSeq;2;34;0;com.axelor.apps.stock.db.LogisticalForm-deliveryNumberSeq
+FIELD;collectionDate;3336;false;LOCALDATE;;collectionDate;2;34;0;com.axelor.apps.stock.db.LogisticalForm-collectionDate
+FIELD;deliverToCustomerPartner.partnerSeq;3340;false;STANDARD;;partnerNumberSeq;2;34;0;com.axelor.apps.base.db.Partner-partnerSeq
+FIELD;dimensions;3348;false;STANDARD;;dimensions;2;0;39;com.axelor.apps.stock.db.LogisticalFormLine-dimensions
+QUERY; ;3352;false;STANDARD;" Select CASE WHEN self.typeSelect = 3 THEN 'true' ELSE 'false' END From LogisticalFormLine self Where self.id = :id";isDetail;2;0;39;0
+QUERY_NATIVE; ;3356;false;STANDARD;"Select CONCAT(    bp.code, ' ', (Select trans.message_value from meta_translation trans where trans.message_key = CONCAT('value:', bp.name) AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code,'en'))) From stock_stock_move_line self Left join base_product bp on self.product = bp.id Where self.finished_product IN      (          Select sm.id          FROM stock_stock_move_line as sm          WHERE sm.product = :stockMoveLine.product.id            AND sm.tracking_number = :stockMoveLine.trackingNumber.id            AND sm.produced_manuf_order IS NOT NULL      )  AND self.consumed_manuf_order IS NOT NULL";subProduct;2;0;39;0
+QUERY_NATIVE; ;3360;false;STANDARD;"Select COALESCE(stn.tracking_number_seq, '') From stock_stock_move_line self Left join stock_tracking_number stn on self.tracking_number = stn.id Where self.finished_product IN      (          Select sm.id          FROM stock_stock_move_line as sm          WHERE sm.product = :stockMoveLine.product.id            AND sm.tracking_number = :stockMoveLine.trackingNumber.id            AND sm.produced_manuf_order IS NOT NULL      ) AND self.consumed_manuf_order IS NOT NULL";subProductTrackingNumber;2;0;39;0
+QUERY_NATIVE; ;3364;false;STANDARD;"Select    CONCAT(        (Select metaSelectItem.title               From meta_select_item metaSelectItem                Join meta_select metaSelect on metaSelectItem.select_id = metaSelect.id               Where metaSelect.name = 'logistical.form.line.type.select'                 AND metaSelectItem.value = CAST(:typeSelect AS varchar(255))),        ' No.',        self.parcel_pallet_number        ) From stock_logistical_form_line self Where self.id = :id;";locationName;2;0;39;0
+QUERY_NATIVE; ;3368;false;STANDARD;"Select       CASE           WHEN ssml.tracking_number IS NOT NULL THEN               CONCAT(                       (Select trans.message_value                        From meta_translation trans                        Where trans.message_key = concat('value:', :stockMoveLine.product.name)                          AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code, 'en')                        limit 1),                       E'\n',                       stn.tracking_number_seq                   )           ELSE               (Select trans.message_value                From meta_translation trans                Where trans.message_key = concat('value:', :stockMoveLine.product.name)                  AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code, 'en')                limit 1)           END From stock_logistical_form_line self         LEFT Join stock_stock_move_line ssml on self.stock_move_line = ssml.id        LEFT JOIN stock_tracking_number stn on ssml.tracking_number = stn.id Where self.id = :id;";locationNameDetail;2;0;39;0
+QUERY; ;3372;false;BIGDECIMAL;"Select count(self) From LogisticalFormLine self Where self.logisticalForm.id = :id AND self.typeSelect = 2";numberOfPallets;0;34;0;0
+QUERY; ;3376;false;BIGDECIMAL;"Select sum(self.grossMass) from LogisticalFormLine self Where self.logisticalForm.id = :id AND self.typeSelect = 2";weightTotalProduct;2;34;0;0
+FIELD;qty;3380;false;BIGDECIMAL;;qtyProduct;2;0;39;com.axelor.apps.stock.db.LogisticalFormLine-qty
+FIELD;stockMoveLine.product.grossMass;3384;false;BIGDECIMAL;;weightProductDetail;2;0;39;com.axelor.apps.base.db.Product-grossMass
+FIELD;deliverToCustomerPartner.name;3388;false;STANDARD;;nameCustomer;2;34;0;com.axelor.apps.base.db.Partner-name
+FIELD;grossMass;3392;false;BIGDECIMAL;;weightProduct;2;0;39;com.axelor.apps.stock.db.LogisticalFormLine-grossMass
+FIELD;grossMass;3460;false;BIGDECIMAL;;weightProduct;2;0;41;com.axelor.apps.stock.db.LogisticalFormLine-grossMass
+FIELD;stockMoveLine.product.grossMass;3464;false;BIGDECIMAL;;weightProductDetail;2;0;41;com.axelor.apps.base.db.Product-grossMass
+FIELD;qty;3468;false;BIGDECIMAL;;qtyProduct;2;0;41;com.axelor.apps.stock.db.LogisticalFormLine-qty
+QUERY_NATIVE; ;3472;false;STANDARD;"Select       CASE           WHEN ssml.tracking_number IS NOT NULL THEN               CONCAT(                       (Select trans.message_value                        From meta_translation trans                        Where trans.message_key = concat('value:', :stockMoveLine.product.name)                          AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code, 'en')                        limit 1),                       E'\n',                       stn.tracking_number_seq                   )           ELSE               (Select trans.message_value                From meta_translation trans                Where trans.message_key = concat('value:', :stockMoveLine.product.name)                  AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code, 'en')                limit 1)           END From stock_logistical_form_line self         LEFT Join stock_stock_move_line ssml on self.stock_move_line = ssml.id        LEFT JOIN stock_tracking_number stn on ssml.tracking_number = stn.id Where self.id = :id;";locationNameDetail;2;0;41;0
+QUERY_NATIVE; ;3476;false;STANDARD;"Select    CONCAT(        (Select metaSelectItem.title               From meta_select_item metaSelectItem                Join meta_select metaSelect on metaSelectItem.select_id = metaSelect.id               Where metaSelect.name = 'logistical.form.line.type.select'                 AND metaSelectItem.value = CAST(:typeSelect AS varchar(255))),        ' No.',        self.parcel_pallet_number        ) From stock_logistical_form_line self Where self.id = :id;";locationName;2;0;41;0
+QUERY_NATIVE; ;3480;false;STANDARD;"Select COALESCE(stn.tracking_number_seq, '') From stock_stock_move_line self Left join stock_tracking_number stn on self.tracking_number = stn.id Where self.finished_product IN      (          Select sm.id          FROM stock_stock_move_line as sm          WHERE sm.product = :stockMoveLine.product.id            AND sm.tracking_number = :stockMoveLine.trackingNumber.id            AND sm.produced_manuf_order IS NOT NULL      ) AND self.consumed_manuf_order IS NOT NULL";subProductTrackingNumber;2;0;41;0
+QUERY_NATIVE; ;3484;false;STANDARD;"Select CONCAT(    bp.code, ' ', (Select trans.message_value from meta_translation trans where trans.message_key = CONCAT('value:', bp.name) AND trans.language = COALESCE(:logisticalForm.deliverToCustomerPartner.language.code,'en'))) From stock_stock_move_line self Left join base_product bp on self.product = bp.id Where self.finished_product IN      (          Select sm.id          FROM stock_stock_move_line as sm          WHERE sm.product = :stockMoveLine.product.id            AND sm.tracking_number = :stockMoveLine.trackingNumber.id            AND sm.produced_manuf_order IS NOT NULL      )  AND self.consumed_manuf_order IS NOT NULL";subProduct;2;0;41;0
+QUERY; ;3488;false;STANDARD;" Select CASE WHEN self.typeSelect = 3 THEN 'true' ELSE 'false' END From LogisticalFormLine self Where self.id = :id";isDetail;2;0;41;0
+FIELD;dimensions;3492;false;STANDARD;;dimensions;2;0;41;com.axelor.apps.stock.db.LogisticalFormLine-dimensions
+FIELD;deliverToCustomerPartner.name;3496;false;STANDARD;;nameCustomer;2;36;0;com.axelor.apps.base.db.Partner-name
+QUERY; ;3500;false;BIGDECIMAL;"Select sum(self.grossMass) from LogisticalFormLine self Where self.logisticalForm.id = :id AND self.typeSelect = 2";weightTotalProduct;2;36;0;0
+QUERY; ;3504;false;BIGDECIMAL;"Select count(self) From LogisticalFormLine self Where self.logisticalForm.id = :id AND self.typeSelect = 2";numberOfPallets;0;36;0;0
+FIELD;deliverToCustomerPartner.partnerSeq;3512;false;STANDARD;;partnerNumberSeq;2;36;0;com.axelor.apps.base.db.Partner-partnerSeq
+FIELD;collectionDate;3516;false;LOCALDATE;;collectionDate;2;36;0;com.axelor.apps.stock.db.LogisticalForm-collectionDate
+FIELD;deliveryNumberSeq;3520;false;STANDARD;;deliveryNumberSeq;2;36;0;com.axelor.apps.stock.db.LogisticalForm-deliveryNumberSeq
+FIELD;partner.name;3524;false;STANDARD;;partner;2;37;0;com.axelor.apps.base.db.Partner-name
+FIELD;origin;2112-948;false;STANDARD;;origin;2;8;0;com.axelor.apps.stock.db.StockMove-origin
